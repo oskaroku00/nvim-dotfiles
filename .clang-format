@@ -1,0 +1,15 @@
+---
+BasedOnStyle: LLVM
+IndentWidth: 4
+ColumnLimit: 120
+AllowShortBlocksOnASingleLine: true
+---
+Language: Cpp
+IndentWidth: 4
+DerivePointerAlignment: false
+PointerAlignment: Left
+---
+Language: Java
+IndentWidth: 4
+UseTabStyle: UT_ForIndentation
+---
