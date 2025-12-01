@@ -1,5 +1,5 @@
 -- NOTE: Custom configs directory in opts
-
+--
 require 'opts'
 
 -- TODO: Chek

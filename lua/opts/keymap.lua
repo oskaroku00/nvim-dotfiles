@@ -1,7 +1,3 @@
--- [[ Basic Keymaps ]]
---  See `:help vim.keymap.set()`
--- Custom
-
 -- Keymaps cheatsheet
 -- Up = '<Up> ',
 -- Down = '<Down> ',
@@ -36,10 +32,11 @@ for i = 1, 8 do
 end
 vim.keymap.set({ 'n' }, 'gt', '<cmd>tabnew<CR>', { desc = 'new tab' })
 
-vim.keymap.set({ 'i' }, '<S-BS>', '<C-w>', { desc = 'delete word in insert' })
+vim.keymap.set({ 'i' }, '<C-BS>', '<C-w>', { desc = 'delete word in insert', remap = true })
 
 vim.keymap.set({ 'n' }, '<leader>sc', '<cmd>Telescope colorscheme<CR>', { desc = 'todo list search' })
--- Markdown nvim mapsm
+
+-- Markdown nvim search todos
 vim.keymap.set(
   { 'n' },
   '<leader>st',
@@ -47,11 +44,11 @@ vim.keymap.set(
   { desc = 'todo list search' }
 )
 
-vim.keymap.set({ 'i' }, '<C-n>', '<C-x><C-n>', { noremap = false, desc = 'autocomplete native without LSP' })
 vim.keymap.set({ 'n' }, '<Leader>e', '<cmd>Oil --float<CR>', { desc = 'oil explorer' })
 vim.keymap.set({ 'n' }, '<Leader>w', '<Cmd>update<CR>', { desc = 'write' })
-vim.keymap.set({ 'n' }, '<Leader>q', '<Cmd>quit<CR>', { desc = 'quit' })
-vim.keymap.set({ 'n' }, '<Leader>Q', '<Cmd>wqa!<CR>', { desc = 'quit all force' })
+vim.keymap.set({ 'n' }, '<Leader>wd', '<Cmd>bd<CR>', { desc = 'delete buffer' })
+vim.keymap.set({ 'n' }, '<Leader>q', '<Cmd>q<CR>', { desc = 'quit' })
+vim.keymap.set({ 'n' }, '<Leader>Q', '<Cmd>wqa<CR>', { desc = 'quit all force' })
 
 vim.keymap.set({ 'n' }, '<Leader>cr', '<cmd>CompetiTest run<CR>', { desc = 'Competitive run' })
 vim.keymap.set({ 'n' }, '<Leader>cp', '<cmd>CompetiTest receive problem<CR>', { desc = 'Competitive recieve problem' })
@@ -61,7 +58,12 @@ vim.keymap.set({ 'v', 'x', 'n' }, '<C-y>', '"+y', { desc = 'System clipboard yan
 vim.keymap.set({ 'n', 'v', 'x' }, ';', ':', { desc = 'Remap ; to :' })
 vim.keymap.set({ 'n', 'v', 'x' }, ':', ';', { desc = 'Remap : to ;' })
 
-vim.keymap.set({ 'n', 'v', 'x' }, '<leader>E', '<Cmd>edit $MYVIMRC<CR>', { desc = 'Edit ' .. vim.fn.expand '$MYVIMRC' })
+vim.keymap.set(
+  { 'n', 'v', 'x' },
+  '<leader>E',
+  '<Cmd>edit $MYVIMRC<CR>',
+  { desc = 'Edit vimrc' .. vim.fn.expand '$MYVIMRC' }
+)
 
 vim.keymap.set('n', 'J', 'mzJ`z')
 
@@ -77,74 +79,40 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>d', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
--- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
--- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
--- is not what someone will guess without a bit more experience.
---
 -- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
 -- or just use <C-\><C-n> to exit terminal mode
-vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
-
--- TIP: Disable arrow keys in normal mode
--- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
--- vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
--- vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
--- vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
-
--- Keybinds to make split navigation easier.
---  Use CTRL+<hjkl> to switch between windows
---
---  See `:help wincmd` for a list of all window commands
+vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode into normal mode' })
 vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
 vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
--- restore cursor to file position in previous editing session
-vim.api.nvim_create_autocmd('BufReadPost', {
-  callback = function(args)
-    local mark = vim.api.nvim_buf_get_mark(args.buf, '"')
-    local line_count = vim.api.nvim_buf_line_count(args.buf)
-    if mark[1] > 0 and mark[1] <= line_count then
-      vim.api.nvim_win_set_cursor(0, mark)
-      -- defer centering slightly so it's applied after render
-      vim.schedule(function()
-        vim.cmd 'normal! zz'
-      end)
-    end
-  end,
-})
-
--- auto resize splits when the terminal's window is resized
-vim.api.nvim_create_autocmd('VimResized', {
-  command = 'wincmd =',
-})
-
--- no auto continue comments on new line
-vim.api.nvim_create_autocmd('FileType', {
-  group = vim.api.nvim_create_augroup('no_auto_comment', {}),
-  callback = function()
-    vim.opt_local.formatoptions:remove { 'c', 'r', 'o' }
-  end,
-})
-
--- -- show cursorline only in active window disable
--- vim.api.nvim_create_autocmd({ "WinLeave", "BufLeave" }, {
---   group = "active_cursorline",
---   callback = function()
---     vim.opt_local.cursorline = false
---   end,
--- })
-
-vim.api.nvim_create_autocmd('TextYankPost', {
-  desc = 'Highlight when yanking (copying) text',
-  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
-  callback = function()
-    vim.hl.on_yank()
-  end,
-})
-
 -- navigate to and fix next mispelled word
 vim.api.nvim_set_keymap('n', '<leader>N', ']s 1z=', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>n', ']s z=', { noremap = true, silent = false })
 vim.keymap.set('n', 'zz', 'z=', { noremap = false })
+
+-------------
+-- Markdown
+-------------
+-- Obsidian nvim
+vim.keymap.set({ 'n' }, '<leader>mp', '<cmd>Obsidian paste_img<CR><CR><CR>', { desc = 'paste obsidian image' })
+vim.keymap.set({ 'n' }, '<leader>mt', '<cmd>Obsidian template<CR>', { desc = 'templates' })
+-- vim.keymap.set({ 'n' }, '<leader>ms', '<cmd>Obsidian quick_switch<CR>', { desc = 'search md files' })
+vim.keymap.set({ 'n' }, '<leader>mb', '<cmd>Obsidian backlinks<CR>', { desc = 'backlinks' })
+-- vim.keymap.set({ 'n' }, '<leader>md', '<cmd>Obsidian dailies<CR>', { desc = 'daily notes' })
+vim.keymap.set({ 'n' }, '<leader>mg', '<cmd>Obsidian tags<CR>', { desc = 'tags' })
+vim.keymap.set({ 'n' }, '<leader>mo', '<cmd>Obsidian<CR>', { desc = 'open obsidian general search' })
+
+--- TODO insert
+vim.keymap.set('n', '<leader>T', function()
+  vim.cmd 'normal! OTODO:'
+  -- Comment the current line (requires a commenting plugin like 'numToStr/Comment.nvim')
+  vim.cmd 'normal gcc' -- 'gcc' is the default toggle comment in Comment.nvim
+  -- Move cursor after the colon and space
+  vim.cmd 'normal f:a '
+  vim.cmd 'startinsert'
+end, { noremap = false, silent = true })
+-------------
+-- Markdown end
+-------------

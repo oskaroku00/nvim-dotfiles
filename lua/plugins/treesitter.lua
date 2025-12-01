@@ -8,6 +8,7 @@ return {
       ensure_installed = {
         'bash',
         'c',
+        'cpp',
         'diff',
         'html',
         'lua',
@@ -17,12 +18,12 @@ return {
         'query',
         'vim',
         'vimdoc',
-        'cpp',
         'python',
         'java',
         'latex',
         'yaml',
       },
+      -- ignore_install = { 'org' },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {

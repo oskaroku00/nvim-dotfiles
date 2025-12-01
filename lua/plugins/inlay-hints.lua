@@ -1,0 +1,45 @@
+return {
+  -- {
+  --   'MysticalDevil/inlay-hints.nvim',
+  --   event = 'LspAttach',
+  --   dependencies = { 'neovim/nvim-lspconfig' },
+  --   config = function()
+  --     require('inlay-hints').setup {
+  --       commands = { enable = true }, -- Enable InlayHints commands, include `InlayHintsToggle`, `InlayHintsEnable` and `InlayHintsDisable`
+  --       autocmd = { enable = true }, -- Enable the inlay hints on `LspAttach` event
+  --       require('lspconfig').clangd.setup {
+  --         settings = {
+  --           clangd = {
+  --             InlayHints = {
+  --               Designators = true,
+  --               Enabled = true,
+  --               ParameterNames = true,
+  --               DeducedTypes = true,
+  --             },
+  --             fallbackFlags = { '-std=c++20' },
+  --           },
+  --         },
+  --       },
+  --       require('lspconfig').jdtls.setup {
+  --         settings = {
+  --           java = {
+  --             inlayHints = {
+  --               parameterNames = {
+  --                 enabled = 'all',
+  --                 exclusions = { 'this' },
+  --               },
+  --             },
+  --           },
+  --         },
+  --       },
+  --       require('lspconfig').pylyzer.setup {
+  --         settings = {
+  --           python = {
+  --             inlayHints = true,
+  --           },
+  --         },
+  --       },
+  --     }
+  --   end,
+  -- },
+}

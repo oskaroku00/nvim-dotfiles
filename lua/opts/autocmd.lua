@@ -1,3 +1,70 @@
+-- local state = {
+--   floating = {
+--     buf = -1,
+--     win = -1,
+--   },
+-- }
+--
+-- local function create_floating_window(opts)
+--   opts = opts or {}
+--   local width = opts.width or math.floor(vim.o.columns * 0.8)
+--   local height = opts.height or math.floor(vim.o.lines * 0.8)
+--
+--   -- Calculate the position to center the window
+--   local col = math.floor((vim.o.columns - width) / 2)
+--   local row = math.floor((vim.o.lines - height) / 2)
+--
+--   -- Create a buffer
+--   local buf = nil
+--   if vim.api.nvim_buf_is_valid(opts.buf) then
+--     buf = opts.buf
+--   else
+--     buf = vim.api.nvim_create_buf(false, true) -- No file, scratch buffer
+--   end
+--
+--   -- Define window configuration
+--   local win_config = {
+--     relative = 'editor',
+--     width = width,
+--     height = height,
+--     col = col,
+--     row = row,
+--     style = 'minimal', -- No borders or extra UI elements
+--     border = 'rounded',
+--   }
+--
+--   -- Create the floating window
+--   local win = vim.api.nvim_open_win(buf, true, win_config)
+--
+--   return { buf = buf, win = win }
+-- end
+--
+-- local toggle_terminal = function()
+--   if not vim.api.nvim_win_is_valid(state.floating.win) then
+--     state.floating = create_floating_window { buf = state.floating.buf }
+--     if vim.bo[state.floating.buf].buftype ~= 'terminal' then
+--       vim.cmd.terminal()
+--     end
+--   else
+--     vim.api.nvim_win_hide(state.floating.win)
+--   end
+-- end
+--
+-- -- Example usage:
+-- -- Create a floating window with default dimensions
+-- vim.api.nvim_create_user_command('Floaterminal', toggle_terminal, { nargs = 0 })
+-- vim.keymap.set({ 'n', 't' }, '<leader>tt', vim.cmd 'Floaterminal')
+--
+vim.api.nvim_create_autocmd('BufEnter', {
+  callback = function()
+    local ft = vim.bo.filetype
+    if ft ~= 'markdown' and ft ~= 'txt' and ft ~= 'env' then
+      vim.diagnostic.enable(true, { bufnr = 0 }) -- enable for current buffer
+      vim.opt.spell = false
+      vim.opt.linebreak = false
+    end
+  end,
+})
 -- restore cursor to file position in previous editing session
 vim.api.nvim_create_autocmd('BufReadPost', {
   callback = function(args)
@@ -41,25 +108,53 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.hl.on_yank()
   end,
 })
-
--- Obsidian nvim
-vim.keymap.set({ 'n' }, '<leader>op', '<cmd>Obsidian paste_img<CR><CR><CR>', { desc = 'paste obsidian image' })
-vim.keymap.set({ 'n' }, '<leader>ot', '<cmd>Obsidian template<CR>', { desc = 'templates' })
-vim.keymap.set({ 'n' }, '<leader>os', '<cmd>Obsidian quick_switch<CR>', { desc = 'search md files' })
-vim.keymap.set({ 'n' }, '<leader>ob', '<cmd>Obsidian backlinks<CR>', { desc = 'backlinks' })
-vim.keymap.set({ 'n' }, '<leader>od', '<cmd>Obsidian dailies<CR>', { desc = 'daily notes' })
-vim.keymap.set({ 'n' }, '<leader>og', '<cmd>Obsidian tags<CR>', { desc = 'tags' })
-vim.keymap.set({ 'n' }, '<leader>oo', '<cmd>Obsidian<CR>', { desc = 'open obsidian general search' })
+----------------
+-- Markdown start
+----------------
 
 -- Disable diagnostics and enable spell for markdown-like files
 vim.api.nvim_create_autocmd('FileType', {
-  pattern = { 'markdown', 'txt', 'env' },
+  pattern = { 'markdown', 'txt', 'env', 'org', 'wiki' },
   callback = function()
     vim.diagnostic.enable(false, { bufnr = 0 }) -- disable for current buffer
     vim.opt.spelllang = 'en_us,es'
     vim.opt.spell = true
     vim.opt.linebreak = true
-    -- vim.cmd 'colorscheme vage'
+    vim.opt.wrap = true
+    if vim.g.loaded_markdown_plus ~= 1 then
+      os.execute('sleep ' .. 1)
+    end
+    local opts = { buffer = 0, silent = true }
+    local handlers = require 'markdown-plus.list.handlers'
+    local checkbox = require 'markdown-plus.list.checkbox'
+    local renumber = require 'markdown-plus.list.renumber'
+
+    -- Insert Mode
+    vim.keymap.set('i', '<CR>', handlers.handle_enter, opts)
+    -- vim.keymap.set('i', '<BS>', handlers.handle_backspace, opts)
+    -- vim.keymap.set('i', '<C-t>', checkbox.toggle_checkbox_insert, opts)
+    -- Navigate headings
+    vim.keymap.set('n', 'gn', '<Plug>(MarkdownPlusNextHeader)')
+    vim.keymap.set('n', 'gp', '<Plug>(MarkdownPlusPrevHeader)')
+
+    -- Normal mode
+    vim.keymap.set('n', '<leader>mr', '<Plug>(MarkdownPlusRenumberLists)')
+    vim.keymap.set('n', '<leader>md', '<Plug>(MarkdownPlusDebugLists)')
+    vim.keymap.set('n', 'o', '<Plug>(MarkdownPlusNewListItemBelow)')
+    vim.keymap.set('n', 'O', '<Plug>(MarkdownPlusNewListItemAbove)')
+    vim.keymap.set('n', '<leader>mq', '<Plug>(MarkdownPlusToggleQuote)')
+    vim.keymap.set('x', '<leader>mq', '<Plug>(MarkdownPlusToggleQuote)')
+    vim.keymap.set('n', '<leader>mc', '<Plug>(MarkdownPlusInsertCallout)')
+    vim.keymap.set('x', '<leader>mc', '<Plug>(MarkdownPlusInsertCallout)')
+    vim.keymap.set({ 'x', 'n' }, '<C-b>', '<Plug>(MarkdownPlusBold)', { noremap = false })
+    vim.keymap.set({ 'x', 'n' }, '<C-i>', '<Plug>(MarkdownPlusItalic)')
+    vim.keymap.set({ 'x', 'n' }, '<C-s>', '<Plug>(MarkdownPlusStrikethrough)')
+    vim.keymap.set({ 'x', 'n' }, '<C-k>', '<Plug>(MarkdownPlusCode)')
+    vim.keymap.set({ 'x', 'n' }, '<leader>mw', '<Plug>(MarkdownPlusCodeBlock)')
+    vim.keymap.set({ 'x', 'n' }, '<C-x>', '<Plug>(MarkdownPlusClearFormatting)')
+
+    -- vim.keymap.set('i', '<Tab>', '<Plug>(MarkdownPlusListIndent)')
+    -- vim.keymap.set('i', '<S-Tab>', '<Plug>(MarkdownPlusListOutdent)')
   end,
 })
 
@@ -67,10 +162,11 @@ vim.api.nvim_create_autocmd('FileType', {
 vim.api.nvim_create_autocmd('BufEnter', {
   callback = function()
     local ft = vim.bo.filetype
-    if ft ~= 'markdown' and ft ~= 'txt' and ft ~= 'env' then
+    if ft ~= 'markdown' and ft ~= 'txt' and ft ~= 'env' and ft ~= 'org' then
       vim.diagnostic.enable(true, { bufnr = 0 }) -- enable for current buffer
       vim.opt.spell = false
       vim.opt.linebreak = false
+      vim.opt.wrap = false
     end
   end,
 })
@@ -105,20 +201,12 @@ vim.keymap.set('n', '<leader>cm', function()
   create_md(name)
 end, { noremap = true, silent = true, desc = 'create markdown file within []' })
 
--- fzf
-vim.keymap.set('n', '<leader>z', function()
-  -- Yank text inside []
-  vim.cmd 'normal yi['
-
-  -- Get the yanked text from register "
-  local text = vim.fn.getreg '"'
-
-  -- Open a terminal and run the script with the text
-  vim.cmd('split | terminal sh -c "~/.config/scripts/fzf_zathura.sh ' .. vim.fn.shellescape(text) .. '"')
-end, { desc = 'file search inside []', noremap = true, silent = false })
+----------------
+-- Markdown end
+----------------
 
 -------------------------------------------------------------------------------
---                           Folding section
+--                           Folding section Markdown
 -------------------------------------------------------------------------------
 
 -- Checks each line to see if it matches a markdown heading (#, ##, etc.):
@@ -286,18 +374,18 @@ end, { desc = '[P]Fold all headings level 4 or above' })
 --
 -- Use <CR> to fold when in normal mode
 -- To see help about folds use `:help fold`
-vim.keymap.set('n', '<CR>', function()
-  -- Get the current line number
-  local line = vim.fn.line '.'
-  -- Get the fold level of the current line
-  local foldlevel = vim.fn.foldlevel(line)
-  if foldlevel == 0 then
-    vim.notify('No fold found', vim.log.levels.INFO)
-  else
-    vim.cmd 'normal! za'
-    vim.cmd 'normal! zz' -- center the cursor line on screen
-  end
-end, { desc = '[P]Toggle fold' })
+-- vim.keymap.set('n', '<CR>', function()
+--   -- Get the current line number
+--   local line = vim.fn.line '.'
+--   -- Get the fold level of the current line
+--   local foldlevel = vim.fn.foldlevel(line)
+--   if foldlevel == 0 then
+--     vim.notify('No fold found', vim.log.levels.INFO)
+--   else
+--     vim.cmd 'normal! za'
+--     vim.cmd 'normal! zz' -- center the cursor line on screen
+--   end
+-- end, { desc = '[P]Toggle fold' })
 
 -- HACK: Fold markdown headings in Neovim with a keymap
 -- https://youtu.be/EYczZLNEnIY

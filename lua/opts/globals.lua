@@ -1,8 +1,12 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+-- this settings are controlled with a autocmd bufenter for text writing files
 vim.opt.spelllang = 'en_us,es'
 vim.opt.spell = false
+vim.opt.shellslash = true
+vim.opt.conceallevel = 2
+vim.opt.concealcursor = 'nc'
 
 vim.g.have_nerd_font = true
 

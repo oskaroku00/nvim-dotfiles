@@ -31,8 +31,8 @@ return {
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
-        java = { 'clang-format' },
-        cpp = { 'clang-format' },
+        java = { 'clang_format' },
+        -- cpp = { 'clang_format' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
@@ -41,29 +41,15 @@ return {
       },
       formatters = {
         clang_format = {
-          prepend_args = { '--style=' .. vim.fn.stdpath 'config' .. '/.clang-format', '--fallback-style=LLVM' },
-          -- args = function()
-          --   -- Fetch indentation settings dynamically
-          --   local shiftwidth = vim.api.nvim_get_option 'shiftwidth'
-          --   local expandtab = vim.api.nvim_get_option 'expandtab'
-          --
-          --   -- Build args based on Vim settings
-          --   local args = { '--style={BasedOnStyle: llvm, ' }
-          --
-          --   -- Add tab width based on shiftwidth
-          --   table.insert(args, 'IndentWidth: ' .. shiftwidth)
-          --
-          --   -- Use tabs or keep spaces
-          --   if expandtab then
-          --     table.insert(args, ', TabWidth: ' .. shiftwidth)
-          --     table.insert(args, ', UseTabs: Always')
-          --   end
-          --
-          --   table.insert(args, ' }')
-          --   return args
-          -- end,
+          preappend_args = { "--style='file:/home/osk/.config/nvim/.clang-format'", '--fallback-style=GNU' },
         },
       },
     },
   },
 }
+-- prepend_args = { "--style='file:" .. vim.fn.stdpath 'config' .. "/.clang-format'" },
+-- prepend_args = function()
+-- return { '--style=file' }
+-- return { '--style='file:/home/osk/.config/nvim/.clang-format'' }
+-- end,
+-- append_args = { '--style=' .. vim.fn.stdpath 'config' .. '/.clang-format', '--fallback-style=LLVM' },
