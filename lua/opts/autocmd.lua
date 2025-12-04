@@ -120,6 +120,8 @@ vim.api.nvim_create_autocmd('FileType', {
     vim.opt.spelllang = 'en_us,es'
     vim.opt.spell = true
     vim.opt.linebreak = true
+    vim.opt.conceallevel = 2
+    vim.opt.concealcursor = 'nc'
     vim.opt.wrap = true
     if vim.g.loaded_markdown_plus ~= 1 then
       os.execute('sleep ' .. 1)
@@ -140,17 +142,17 @@ vim.api.nvim_create_autocmd('FileType', {
     -- Normal mode
     vim.keymap.set('n', '<leader>mr', '<Plug>(MarkdownPlusRenumberLists)')
     vim.keymap.set('n', '<leader>md', '<Plug>(MarkdownPlusDebugLists)')
-    vim.keymap.set('n', 'o', '<Plug>(MarkdownPlusNewListItemBelow)')
-    vim.keymap.set('n', 'O', '<Plug>(MarkdownPlusNewListItemAbove)')
+    -- vim.keymap.set('n', 'o', '<Plug>(MarkdownPlusNewListItemBelow)')
+    -- vim.keymap.set('n', 'O', '<Plug>(MarkdownPlusNewListItemAbove)')
     vim.keymap.set('n', '<leader>mq', '<Plug>(MarkdownPlusToggleQuote)')
     vim.keymap.set('x', '<leader>mq', '<Plug>(MarkdownPlusToggleQuote)')
     vim.keymap.set('n', '<leader>mc', '<Plug>(MarkdownPlusInsertCallout)')
     vim.keymap.set('x', '<leader>mc', '<Plug>(MarkdownPlusInsertCallout)')
+    vim.keymap.set({ 'x', 'n' }, '<leader>mw', '<Plug>(MarkdownPlusCodeBlock)')
     vim.keymap.set({ 'x', 'n' }, '<C-b>', '<Plug>(MarkdownPlusBold)', { noremap = false })
     vim.keymap.set({ 'x', 'n' }, '<C-i>', '<Plug>(MarkdownPlusItalic)')
     vim.keymap.set({ 'x', 'n' }, '<C-s>', '<Plug>(MarkdownPlusStrikethrough)')
     vim.keymap.set({ 'x', 'n' }, '<C-k>', '<Plug>(MarkdownPlusCode)')
-    vim.keymap.set({ 'x', 'n' }, '<leader>mw', '<Plug>(MarkdownPlusCodeBlock)')
     vim.keymap.set({ 'x', 'n' }, '<C-x>', '<Plug>(MarkdownPlusClearFormatting)')
 
     -- vim.keymap.set('i', '<Tab>', '<Plug>(MarkdownPlusListIndent)')

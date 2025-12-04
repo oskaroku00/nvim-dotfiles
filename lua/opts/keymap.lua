@@ -32,7 +32,9 @@ for i = 1, 8 do
 end
 vim.keymap.set({ 'n' }, 'gt', '<cmd>tabnew<CR>', { desc = 'new tab' })
 
-vim.keymap.set({ 'i' }, '<C-BS>', '<C-w>', { desc = 'delete word in insert', remap = true })
+-- Delete word behind the cursor in insert mode using Ctrl+Backspace
+vim.keymap.set('i', '<C-BS>', '<C-w>', { noremap = false, silent = true })
+vim.keymap.set('i', '<C-H>', '<C-w>', { noremap = false, silent = true })
 
 vim.keymap.set({ 'n' }, '<leader>sc', '<cmd>Telescope colorscheme<CR>', { desc = 'todo list search' })
 
@@ -103,6 +105,12 @@ vim.keymap.set({ 'n' }, '<leader>mb', '<cmd>Obsidian backlinks<CR>', { desc = 'b
 -- vim.keymap.set({ 'n' }, '<leader>md', '<cmd>Obsidian dailies<CR>', { desc = 'daily notes' })
 vim.keymap.set({ 'n' }, '<leader>mg', '<cmd>Obsidian tags<CR>', { desc = 'tags' })
 vim.keymap.set({ 'n' }, '<leader>mo', '<cmd>Obsidian<CR>', { desc = 'open obsidian general search' })
+
+vim.keymap.set({ 'n' }, '<Leader>p', '"+p', { desc = 'paste system clipboard' })
+-- Insert document link
+vim.keymap.set('n', '<leader>ml', function()
+  vim.cmd 'normal "+pVsa]Vsa]:'
+end, { noremap = false, silent = true })
 
 --- TODO insert
 vim.keymap.set('n', '<leader>T', function()

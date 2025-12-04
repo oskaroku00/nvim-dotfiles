@@ -40,7 +40,6 @@ ls.add_snippets('markdown', {
     i(2),
     t { '', '' },
     t { '', '' },
-    t { '---', '' },
   }),
 
   s('ee', {
