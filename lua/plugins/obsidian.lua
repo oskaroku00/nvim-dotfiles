@@ -13,7 +13,7 @@ return {
       workspaces = {
         {
           name = 'personal-vault',
-          path = '~/Documents/Obsidian-Vault-Oskar',
+          path = '~/Documents/vault/md',
         },
         -- {
         -- name = "no-vault",
@@ -42,7 +42,7 @@ return {
       completion = {
         nvim_cmp = false,
         blink = true,
-        min_chars = 2,
+        min_chars = 0,
         create_new = false,
       },
       new_notes_location = 'current_dir',

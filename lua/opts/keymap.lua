@@ -55,17 +55,24 @@ vim.keymap.set({ 'n' }, '<Leader>Q', '<Cmd>wqa<CR>', { desc = 'quit all force' }
 vim.keymap.set({ 'n' }, '<Leader>cr', '<cmd>CompetiTest run<CR>', { desc = 'Competitive run' })
 vim.keymap.set({ 'n' }, '<Leader>cp', '<cmd>CompetiTest receive problem<CR>', { desc = 'Competitive recieve problem' })
 
-vim.keymap.set({ 'n' }, '<Leader>p', '"+p', { desc = 'paste system clipboard' })
-vim.keymap.set({ 'v', 'x', 'n' }, '<C-y>', '"+y', { desc = 'System clipboard yank.' })
+-- greatest remap ever
+vim.keymap.set('x', '<leader>p', [["_dP]])
+vim.keymap.set({ 'n', 'v' }, '<leader>d', [["_d]])
+vim.keymap.set({ 'n' }, '<Leader>p', [["+p]], { desc = 'paste system clipboard' })
+vim.keymap.set({ 'v', 'x', 'n' }, '<C-y>', [["+y]], { desc = 'System clipboard yank.' })
 vim.keymap.set({ 'n', 'v', 'x' }, ';', ':', { desc = 'Remap ; to :' })
 vim.keymap.set({ 'n', 'v', 'x' }, ':', ';', { desc = 'Remap : to ;' })
 
-vim.keymap.set(
-  { 'n', 'v', 'x' },
-  '<leader>E',
-  '<Cmd>edit $MYVIMRC<CR>',
-  { desc = 'Edit vimrc' .. vim.fn.expand '$MYVIMRC' }
-)
+vim.keymap.set('n', '<leader>r', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = 'rename default' })
+
+vim.keymap.set('n', '<leader>x', '<cmd>!chmod +x %<CR>', { silent = true, desc = 'executable' })
+
+-- vim.keymap.set(
+--   { 'n', 'v', 'x' },
+--   '<leader>E',
+--   '<Cmd>edit $MYVIMRC<CR>',
+--   { desc = 'Edit vimrc' .. vim.fn.expand '$MYVIMRC' }
+-- )
 
 vim.keymap.set('n', 'J', 'mzJ`z')
 
@@ -102,6 +109,7 @@ vim.keymap.set({ 'n' }, '<leader>mp', '<cmd>Obsidian paste_img<CR><CR><CR>', { d
 vim.keymap.set({ 'n' }, '<leader>mt', '<cmd>Obsidian template<CR>', { desc = 'templates' })
 -- vim.keymap.set({ 'n' }, '<leader>ms', '<cmd>Obsidian quick_switch<CR>', { desc = 'search md files' })
 vim.keymap.set({ 'n' }, '<leader>mb', '<cmd>Obsidian backlinks<CR>', { desc = 'backlinks' })
+vim.keymap.set({ 'n' }, '<leader>mb', '<cmd>Obsidian search<CR>', { desc = 'search' })
 -- vim.keymap.set({ 'n' }, '<leader>md', '<cmd>Obsidian dailies<CR>', { desc = 'daily notes' })
 vim.keymap.set({ 'n' }, '<leader>mg', '<cmd>Obsidian tags<CR>', { desc = 'tags' })
 vim.keymap.set({ 'n' }, '<leader>mo', '<cmd>Obsidian<CR>', { desc = 'open obsidian general search' })
@@ -110,17 +118,17 @@ vim.keymap.set({ 'n' }, '<Leader>p', '"+p', { desc = 'paste system clipboard' })
 -- Insert document link
 vim.keymap.set('n', '<leader>ml', function()
   vim.cmd 'normal "+pVsa]Vsa]:'
-end, { noremap = false, silent = true })
+end, { noremap = false, silent = true, desc = 'default markdown links' })
 
 --- TODO insert
 vim.keymap.set('n', '<leader>T', function()
   vim.cmd 'normal! OTODO:'
   -- Comment the current line (requires a commenting plugin like 'numToStr/Comment.nvim')
-  vim.cmd 'normal gcc' -- 'gcc' is the default toggle comment in Comment.nvim
+  vim.cmd 'normal gcc'
   -- Move cursor after the colon and space
   vim.cmd 'normal f:a '
   vim.cmd 'startinsert'
-end, { noremap = false, silent = true })
+end, { noremap = false, silent = true, desc = 'insert project TODO as a comment' })
 -------------
 -- Markdown end
 -------------

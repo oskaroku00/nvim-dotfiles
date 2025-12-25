@@ -8,7 +8,7 @@ return {
     ---@type render.md.UserConfig
     opts = {
       quote = {
-        repeat_linebreak = false,
+        repeat_linebreak = true,
       },
       completions = {
         blink = { enabled = true },
