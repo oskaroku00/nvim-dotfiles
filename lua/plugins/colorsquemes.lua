@@ -8,7 +8,6 @@ return {
   { 'Skardyy/makurai-nvim' },
   { 'ellisonleao/gruvbox.nvim' },
   { 'jnurmine/Zenburn' },
-  { 'RRethy/base16-nvim' },
   {
     'sainnhe/gruvbox-material',
     config = function()
@@ -110,7 +109,7 @@ return {
         bold = true,
         transparent = false,
       }
-      vim.cmd 'colorscheme onedark'
+      vim.cmd 'colorscheme onedark_dark'
     end,
   },
   { 'EdenEast/nightfox.nvim' },
