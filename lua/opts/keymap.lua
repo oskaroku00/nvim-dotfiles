@@ -101,6 +101,16 @@ vim.api.nvim_set_keymap('n', '<leader>N', ']s 1z=', { noremap = true, silent = t
 vim.api.nvim_set_keymap('n', '<leader>n', ']s z=', { noremap = true, silent = false })
 vim.keymap.set('n', 'zz', 'z=', { noremap = false })
 
+--- TODO insert
+vim.keymap.set('n', '<leader>T', function()
+  vim.cmd 'normal! OTODO:'
+  -- Comment the current line (requires a commenting plugin like 'numToStr/Comment.nvim')
+  vim.cmd 'normal gcc'
+  -- Move cursor after the colon and space
+  vim.cmd 'normal f:a '
+  vim.cmd 'startinsert'
+end, { noremap = false, silent = true, desc = 'insert project TODO as a comment' })
+
 -------------
 -- Markdown
 -------------
@@ -120,15 +130,6 @@ vim.keymap.set('n', '<leader>ml', function()
   vim.cmd 'normal "+pVsa]Vsa]:'
 end, { noremap = false, silent = true, desc = 'default markdown links' })
 
---- TODO insert
-vim.keymap.set('n', '<leader>T', function()
-  vim.cmd 'normal! OTODO:'
-  -- Comment the current line (requires a commenting plugin like 'numToStr/Comment.nvim')
-  vim.cmd 'normal gcc'
-  -- Move cursor after the colon and space
-  vim.cmd 'normal f:a '
-  vim.cmd 'startinsert'
-end, { noremap = false, silent = true, desc = 'insert project TODO as a comment' })
 -------------
 -- Markdown end
 -------------
