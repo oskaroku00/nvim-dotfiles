@@ -1,9 +1,27 @@
----
+# Default settings for C / C++ files
 Language: Cpp
+BasedOnStyle: LLVM
 IndentWidth: 4
-DerivePointerAlignment: false
-PointerAlignment: Left
+TabWidth: 4
+UseTab: Never
+
+# C-specific brace and layout preferences
+BreakBeforeBraces: Custom
+BraceWrapping:
+  AfterFunction: true
+  AfterControlStatement: false
+  AfterStruct: false
+
 ---
+
+# Specific settings for Java files
 Language: Java
+BasedOnStyle: Google
 IndentWidth: 4
----
+TabWidth: 4
+UseTab: Never
+
+# Common Java-specific formatting
+BreakBeforeBraces: Attach
+AllowShortFunctionsOnASingleLine: Empty
+ColumnLimit: 100

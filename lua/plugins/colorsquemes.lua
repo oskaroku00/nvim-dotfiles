@@ -1,24 +1,10 @@
 return {
-  { 'vim-scripts/newsprint.vim' },
   { 'gbprod/nord.nvim' },
-  { 'slugbyte/lackluster.nvim' },
-  { 'vim-scripts/zenesque.vim' },
-  { 'jaredgorski/fogbell.vim' },
-  { 'oahlen/iceberg.nvim' },
-  { 'Skardyy/makurai-nvim' },
-  { 'ellisonleao/gruvbox.nvim' },
-  { 'jnurmine/Zenburn' },
   {
     'sainnhe/gruvbox-material',
     config = function()
       vim.g.gruvbox_material_background = 'hard'
     end,
-  },
-  {
-    'blazkowolf/gruber-darker.nvim',
-    opts = {
-      bold = false,
-    },
   },
   {
     'zenbones-theme/zenbones.nvim',
@@ -109,7 +95,7 @@ return {
         bold = true,
         transparent = false,
       }
-      vim.cmd 'colorscheme onedark_dark'
+      -- vim.cmd 'colorscheme onedark_dark'
     end,
   },
   { 'EdenEast/nightfox.nvim' },
@@ -124,7 +110,6 @@ return {
     }
     -- vim.cmd 'colorscheme carbonfox'
   end,
-  { 'kihachi2000/yash.nvim' },
   {
     'drewxs/ash.nvim',
     lazy = false,
@@ -136,7 +121,7 @@ return {
         -- bold = true,
         transparent = false,
       }
-      -- vim.cmd 'colorscheme ash'
+      vim.cmd 'colorscheme ash'
     end,
   },
 }

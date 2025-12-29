@@ -32,24 +32,17 @@ return {
       formatters_by_ft = {
         lua = { 'stylua' },
         java = { 'clang_format' },
-        -- cpp = { 'clang_format' },
-        -- Conform can also run multiple formatters sequentially
-        -- python = { "isort", "black" },
-        --
-        -- You can use 'stop_after_first' to run the first available formatter from the list
-        -- javascript = { "prettierd", "prettier", stop_after_first = true },
+        cpp = { 'clang_format' },
+        c = { 'clang_format' },
+        python = { 'isort', 'black' },
       },
       formatters = {
         clang_format = {
-          preappend_args = { "--style='file:/home/osk/.config/nvim/.clang-format'" },
+          prepend_args = {
+            '--style=file:' .. vim.fn.stdpath 'config' .. '/.clang-format',
+          },
         },
       },
     },
   },
 }
--- prepend_args = { "--style='file:" .. vim.fn.stdpath 'config' .. "/.clang-format'" },
--- prepend_args = function()
--- return { '--style=file' }
--- return { '--style='file:/home/osk/.config/nvim/.clang-format'' }
--- end,
--- append_args = { '--style=' .. vim.fn.stdpath 'config' .. '/.clang-format', '--fallback-style=LLVM' },
