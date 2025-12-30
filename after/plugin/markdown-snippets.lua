@@ -29,7 +29,16 @@ local sn = ls.snippet_node
 --         ls.jump(-1)
 --     end
 -- end, { silent = true })
-
+ls.add_snippets('org', {
+  s('chekbox', {
+    t '- [ ] ',
+    i(1),
+  }),
+  s('task', {
+    t '- [ ] ',
+    i(1),
+  }),
+})
 ls.add_snippets('markdown', {
   s('ww', {
     t '## ',
