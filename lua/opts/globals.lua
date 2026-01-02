@@ -10,29 +10,25 @@ vim.g.have_nerd_font = true
 
 vim.o.number = true
 vim.o.relativenumber = true
-vim.opt.wrap = false
 
-vim.o.swapfile = false
+-- Enable break indent
+vim.o.breakindent = true
+vim.opt.wrap = false
 
 vim.opt.termguicolors = true
 
 -- Indenting not too literal guess indent takes care most of the time
-vim.opt.tabstop = 2
-vim.opt.softtabstop = 2
-vim.opt.shiftwidth = 2
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
 vim.opt.smartindent = true
--- vim.opt.expandtab = false
 
 -- Border of menus
 vim.opt.winborder = 'rounded'
 
--- Enable break indent
-vim.o.breakindent = true
-
 -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
 vim.o.ignorecase = true
 vim.o.smartcase = true
-
 -- vim.opt.hlsearch = false
 -- vim.opt.incsearch = true
 
@@ -46,12 +42,12 @@ vim.o.updatetime = 250
 vim.o.timeoutlen = 300
 
 -- Configure how new splits should be opened
-vim.o.splitright = true
+-- vim.o.splitright = false
 vim.o.splitbelow = true
 
 -- Display spaces
 vim.o.list = true
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+vim.opt.listchars = { tab = '<->', trail = '·', nbsp = '␣' }
 
 -- Preview substitutions live, as you type!
 vim.o.inccommand = 'split'

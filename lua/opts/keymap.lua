@@ -48,7 +48,7 @@ vim.keymap.set(
 
 vim.keymap.set({ 'n' }, '<Leader>e', '<cmd>Oil --float<CR>', { desc = 'oil explorer' })
 vim.keymap.set({ 'n' }, '<Leader>w', '<Cmd>update<CR>', { desc = 'write' })
-vim.keymap.set({ 'n' }, '<Leader>wd', '<Cmd>bd<CR>', { desc = 'delete buffer' })
+vim.keymap.set({ 'n', 'i', 'v' }, '<C-q>', '<Cmd>w<CR><Cmd>bd<CR>', { desc = 'delete buffer' })
 vim.keymap.set({ 'n' }, '<Leader>q', '<Cmd>q<CR>', { desc = 'quit' })
 vim.keymap.set({ 'n' }, '<Leader>Q', '<Cmd>wqa<CR>', { desc = 'quit all force' })
 
