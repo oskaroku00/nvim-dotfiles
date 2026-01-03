@@ -24,7 +24,9 @@ vim.opt.shiftwidth = 4
 vim.opt.smartindent = true
 
 -- Border of menus
-vim.opt.winborder = 'rounded'
+-- vim.opt.winborder = 'rounded'
+-- vim.opt.winborder = 'single'
+vim.opt.winborder = 'bold'
 
 -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
 vim.o.ignorecase = true

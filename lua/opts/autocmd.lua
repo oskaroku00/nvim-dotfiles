@@ -133,7 +133,7 @@ vim.api.nvim_create_autocmd('FileType', {
 
     -- Insert Mode
     vim.keymap.set('i', '<CR>', handlers.handle_enter, opts)
-    -- vim.keymap.set('i', '<BS>', handlers.handle_backspace, opts)
+    vim.keymap.set('i', '<BS>', handlers.handle_backspace, opts)
     -- vim.keymap.set('i', '<C-t>', checkbox.toggle_checkbox_insert, opts)
     -- Navigate headings
     vim.keymap.set('n', 'gn', '<Plug>(MarkdownPlusNextHeader)')
@@ -142,8 +142,8 @@ vim.api.nvim_create_autocmd('FileType', {
     -- Normal mode
     vim.keymap.set('n', '<leader>mr', '<Plug>(MarkdownPlusRenumberLists)')
     vim.keymap.set('n', '<leader>md', '<Plug>(MarkdownPlusDebugLists)')
-    -- vim.keymap.set('n', 'o', '<Plug>(MarkdownPlusNewListItemBelow)')
-    -- vim.keymap.set('n', 'O', '<Plug>(MarkdownPlusNewListItemAbove)')
+    vim.keymap.set('n', 'o', '<Plug>(MarkdownPlusNewListItemBelow)')
+    vim.keymap.set('n', 'O', '<Plug>(MarkdownPlusNewListItemAbove)')
     vim.keymap.set('n', '<leader>mq', '<Plug>(MarkdownPlusToggleQuote)')
     vim.keymap.set('x', '<leader>mq', '<Plug>(MarkdownPlusToggleQuote)')
     vim.keymap.set('n', '<leader>mc', '<Plug>(MarkdownPlusInsertCallout)')

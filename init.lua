@@ -1,7 +1,5 @@
--- NOTE: Custom configs directory in opts
---
+-- NOTE: Custom configs directory in opts, do not delete this line
 require 'opts'
-
 -- TODO: Chek
 -- There are additional nvim-treesitter modules that you can use to interact
 -- with nvim-treesitter. You should go explore a few and see what interests you:
@@ -24,18 +22,6 @@ end
 ---@type vim.Option
 local rtp = vim.opt.rtp
 rtp:prepend(lazypath)
-
--- [[ Configure and install plugins ]]
---
---  To check the current status of your plugins, run
---    :Lazy
---
---  You can press `?` in this menu for help. Use `:q` to close the window
---
---  To update plugins you can run
---    :Lazy update
---
--- NOTE: Here is where you install your plugins.
 require('lazy').setup({
   -- See `:help gitsigns` to understand what the configuration keys do
   { -- Adds git related signs to the gutter, as well as utilities for managing changes
@@ -105,7 +91,7 @@ require('lazy').setup({
   },
 
   -- Configured kickstart plugins
-  require 'kickstart.plugins.debug',
+
   require 'kickstart.plugins.indent_line',
   require 'kickstart.plugins.lint',
   require 'kickstart.plugins.autopairs',
