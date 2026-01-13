@@ -42,14 +42,14 @@ return {
       completion = {
         nvim_cmp = false,
         blink = true,
-        min_chars = 0,
+        min_chars = 1,
         create_new = false,
       },
       new_notes_location = 'current_dir',
       legacy_commands = false,
       ui = { enabled = false },
       attachments = {
-        img_folder = '/assets',
+        folder = '/assets',
         -- img_text_func = function(path)
         --   local name = vim.fs.basename(tostring(path))
         --   local encoded_name = require("obsidian.util").urlencode(name)

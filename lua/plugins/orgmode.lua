@@ -24,16 +24,19 @@ return {
         },
         org_capture_templates = {
           t = 'TODO',
-          tst = {
+          ts = {
             description = 'Todo Schedule + Time',
-            -- This calculates tomorrow's date automatically
             template = '* TODO %?\n SCHEDULED: %^T',
             target = '~/Documents/vault/org/refile.org',
           },
-          ts = {
+          tS = {
             description = 'Todo Schedule',
-            -- This calculates tomorrow's date automatically
-            template = '* TODO %?\n SCHEDULED: %^t',
+            template = '* TODO [B] %?\n SCHEDULED: %^t',
+            target = '~/Documents/vault/org/refile.org',
+          },
+          tw = {
+            description = 'Todo Want',
+            template = '* TODO [C] %?',
             target = '~/Documents/vault/org/refile.org',
           },
           td = {
@@ -43,17 +46,17 @@ return {
           },
           ta = {
             description = 'Todo Alarm',
-            template = '* TODO %?      :alarm:\n SCHEDULED: %^T',
+            template = '* TODO [A] %?      :alarm:\n SCHEDULED: %^T',
             target = '~/Documents/vault/org/refile.org',
           },
           n = {
             description = 'Note',
-            template = '* %?      :note:\n Taken on %T\n',
+            template = '* %?      :note:\n Taken on %U\n',
             target = '~/Documents/vault/org/thoughts.org',
           },
           p = {
             description = 'Project',
-            template = '* %?      :project:\n Taken on %T\n',
+            template = '* %?      :project:\n Taken on %U\n',
             target = '~/Documents/vault/org/projects-capture.org',
           },
         },

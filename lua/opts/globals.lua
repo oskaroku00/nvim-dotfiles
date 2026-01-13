@@ -36,6 +36,7 @@ vim.o.smartcase = true
 
 -- Keep signcolumn on by default
 vim.o.signcolumn = 'yes'
+-- Only works if textwidth is set (ex: markdown files, custom defined)
 -- vim.opt.colorcolumn = '+1'
 -- Decrease update time
 vim.o.updatetime = 250

@@ -55,16 +55,6 @@
 -- vim.api.nvim_create_user_command('Floaterminal', toggle_terminal, { nargs = 0 })
 -- vim.keymap.set({ 'n', 't' }, '<leader>tt', vim.cmd 'Floaterminal')
 --
-vim.api.nvim_create_autocmd('BufEnter', {
-  callback = function()
-    local ft = vim.bo.filetype
-    if ft ~= 'markdown' and ft ~= 'txt' and ft ~= 'env' then
-      vim.diagnostic.enable(true, { bufnr = 0 }) -- enable for current buffer
-      vim.opt.spell = false
-      vim.opt.linebreak = false
-    end
-  end,
-})
 -- restore cursor to file position in previous editing session
 vim.api.nvim_create_autocmd('BufReadPost', {
   callback = function(args)
@@ -93,14 +83,6 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
--- -- show cursorline only in active window disable
--- vim.api.nvim_create_autocmd({ "WinLeave", "BufLeave" }, {
---   group = "active_cursorline",
---   callback = function()
---     vim.opt_local.cursorline = false
---   end,
--- })
-
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
   group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
@@ -108,77 +90,16 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.hl.on_yank()
   end,
 })
+
 ----------------
 -- Markdown start
 ----------------
 
--- Disable diagnostics and enable spell for markdown-like files
-vim.api.nvim_create_autocmd('FileType', {
+-- Save text files on exit
+vim.api.nvim_create_autocmd('BufLeave', {
   pattern = { 'markdown', 'txt', 'env', 'org', 'wiki' },
   callback = function()
-    vim.diagnostic.enable(false, { bufnr = 0 }) -- disable for current buffer
-    vim.opt.spelllang = 'en_us,es'
-    vim.opt.spell = true
-    vim.opt.linebreak = true
-    vim.opt.conceallevel = 2
-    vim.opt.concealcursor = 'nc'
-    vim.opt.wrap = true
-    if vim.g.loaded_markdown_plus ~= 1 then
-      os.execute('sleep ' .. 1)
-    end
-    local opts = { buffer = 0, silent = true }
-    local handlers = require 'markdown-plus.list.handlers'
-    local checkbox = require 'markdown-plus.list.checkbox'
-    local renumber = require 'markdown-plus.list.renumber'
-
-    -- Insert Mode
-    vim.keymap.set('i', '<CR>', handlers.handle_enter, opts)
-    vim.keymap.set('i', '<BS>', handlers.handle_backspace, opts)
-    -- vim.keymap.set('i', '<C-t>', checkbox.toggle_checkbox_insert, opts)
-    -- Navigate headings
-    vim.keymap.set('n', 'gn', '<Plug>(MarkdownPlusNextHeader)')
-    vim.keymap.set('n', 'gp', '<Plug>(MarkdownPlusPrevHeader)')
-
-    -- Normal mode
-    vim.keymap.set('n', '<leader>mr', '<Plug>(MarkdownPlusRenumberLists)')
-    vim.keymap.set('n', '<leader>md', '<Plug>(MarkdownPlusDebugLists)')
-    vim.keymap.set('n', 'o', '<Plug>(MarkdownPlusNewListItemBelow)')
-    vim.keymap.set('n', 'O', '<Plug>(MarkdownPlusNewListItemAbove)')
-    vim.keymap.set('n', '<leader>mq', '<Plug>(MarkdownPlusToggleQuote)')
-    vim.keymap.set('x', '<leader>mq', '<Plug>(MarkdownPlusToggleQuote)')
-    vim.keymap.set('n', '<leader>mc', '<Plug>(MarkdownPlusInsertCallout)')
-    vim.keymap.set('x', '<leader>mc', '<Plug>(MarkdownPlusInsertCallout)')
-    vim.keymap.set({ 'x', 'n' }, '<leader>mw', '<Plug>(MarkdownPlusCodeBlock)')
-    vim.keymap.set({ 'x', 'n' }, '<C-b>', '<Plug>(MarkdownPlusBold)', { noremap = false })
-    vim.keymap.set({ 'x', 'n' }, '<C-i>', '<Plug>(MarkdownPlusItalic)')
-    vim.keymap.set({ 'x', 'n' }, '<C-s>', '<Plug>(MarkdownPlusStrikethrough)')
-    vim.keymap.set({ 'x', 'n' }, '<C-k>', '<Plug>(MarkdownPlusCode)')
-    vim.keymap.set({ 'x', 'n' }, '<C-x>', '<Plug>(MarkdownPlusClearFormatting)')
-
-    -- vim.keymap.set('i', '<Tab>', '<Plug>(MarkdownPlusListIndent)')
-    -- vim.keymap.set('i', '<S-Tab>', '<Plug>(MarkdownPlusListOutdent)')
-  end,
-})
-
--- Re-enable diagnostics when entering non-markdown buffers
-vim.api.nvim_create_autocmd('BufEnter', {
-  callback = function()
-    local ft = vim.bo.filetype
-    if ft ~= 'markdown' and ft ~= 'txt' and ft ~= 'env' and ft ~= 'org' then
-      vim.diagnostic.enable(true, { bufnr = 0 }) -- enable for current buffer
-      vim.opt.spell = false
-      vim.opt.linebreak = false
-      vim.opt.wrap = false
-    end
-  end,
-})
-
--- Save markdown files on exit
-vim.api.nvim_create_autocmd('BufLeave', {
-  pattern = '*.md',
-  callback = function()
     vim.cmd 'silent! write'
-    -- vim.cmd 'colorscheme vage'
   end,
 })
 
@@ -193,15 +114,176 @@ local function create_md(name)
   vim.cmd('e ' .. filename)
 end
 
--- Keybinding: yank text inside [] and create markdown file
-vim.keymap.set('n', '<leader>cm', function()
-  -- Yank text inside []
-  vim.cmd 'normal! yi['
-  -- Get yanked text
-  local name = vim.fn.getreg '"'
-  -- Call the function
-  create_md(name)
-end, { noremap = true, silent = true, desc = 'create markdown file within []' })
+-- Local options for note files
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'markdown', 'txt', 'env', 'org', 'wiki', 'orgagenda' },
+  callback = function()
+    local opts = { buffer = 0, silent = true }
+    vim.diagnostic.enable(false, { bufnr = 0 }) -- disable for current buffer
+
+    vim.opt_local.spelllang = 'en_us,es'
+    vim.opt_local.spell = true
+
+    vim.opt_local.conceallevel = 2
+    vim.opt_local.concealcursor = 'nc'
+
+    vim.opt_local.wrap = true
+    vim.opt_local.linebreak = true
+    vim.opt_local.colorcolumn = '80'
+    -- vim.opt_local.formatoptions = 'tqranj'
+    vim.opt_local.formatoptions:append 't' -- auto-wrap using textwidth
+    vim.opt_local.formatoptions:append 'q' -- allow formatting comments
+    vim.opt_local.formatoptions:append 'n' -- smart wrap for numbered lists
+
+    -- Keybinding: yank text inside [] and create markdown file
+    vim.keymap.set('n', '<leader>mn', function()
+      -- Yank text inside []
+      vim.cmd 'normal! yi['
+      -- Get yanked text
+      local name = vim.fn.getreg '"'
+      -- Call the function
+      create_md(name)
+    end, { noremap = true, silent = true, desc = 'create markdown file within []', buffer = 0 })
+
+    -- Insert Mode
+    local handlers = require 'markdown-plus.list.handlers'
+    local checkbox = require 'markdown-plus.list.checkbox'
+    local renumber = require 'markdown-plus.list.renumber'
+    vim.keymap.set('i', '<CR>', handlers.handle_enter, opts)
+    vim.keymap.set('i', '<BS>', handlers.handle_backspace, opts)
+    -- Navigate headings
+    vim.keymap.set('n', 'gn', '<Plug>(MarkdownPlusNextHeader)', opts)
+    vim.keymap.set('n', 'gp', '<Plug>(MarkdownPlusPrevHeader)', opts)
+    vim.keymap.set('n', '<CR>', checkbox.toggle_checkbox_insert, opts)
+    -- Normal mode
+    vim.keymap.set('n', '<leader>mr', '<Plug>(MarkdownPlusRenumberLists)', opts)
+    vim.keymap.set('n', '<leader>md', '<Plug>(MarkdownPlusDebugLists)', opts)
+
+    vim.keymap.set('n', 'o', '<Plug>(MarkdownPlusNewListItemBelow)', opts)
+    vim.keymap.set('n', 'O', '<Plug>(MarkdownPlusNewListItemAbove)', opts)
+
+    vim.keymap.set('n', '<leader>mq', '<Plug>(MarkdownPlusToggleQuote)', opts)
+    vim.keymap.set('x', '<leader>mq', '<Plug>(MarkdownPlusToggleQuote)', opts)
+    vim.keymap.set('n', '<leader>mc', '<Plug>(MarkdownPlusInsertCallout)', opts)
+    vim.keymap.set('x', '<leader>mc', '<Plug>(MarkdownPlusInsertCallout)', opts)
+    vim.keymap.set({ 'x', 'n' }, '<C-b>', '<Plug>(MarkdownPlusBold)', opts)
+    vim.keymap.set({ 'x', 'n' }, '<C-i>', '<Plug>(MarkdownPlusItalic)', opts)
+    vim.keymap.set({ 'x', 'n' }, '<C-x>', '<Plug>(MarkdownPlusClearFormatting)', opts)
+
+    vim.keymap.set('n', '<leader>mli', '<Plug>(MarkdownPlusInsertLink)')
+    vim.keymap.set('v', '<leader>mli', '<Plug>(MarkdownPlusSelectionToLink)')
+    vim.keymap.set('n', '<leader>mle', '<Plug>(MarkdownPlusEditLink)')
+    vim.keymap.set('n', '<leader>mlr', '<Plug>(MarkdownPlusConvertToReference)')
+    vim.keymap.set('n', '<leader>mln', '<Plug>(MarkdownPlusConvertToInline)')
+    vim.keymap.set('n', '<leader>mla', '<Plug>(MarkdownPlusAutoLinkURL)')
+
+    vim.keymap.set('n', '<leader>mfi', '<Plug>(MarkdownPlusFootnoteInsert)', opts)
+    vim.keymap.set('n', '<leader>mfe', '<Plug>(MarkdownPlusFootnoteEdit)', opts)
+    vim.keymap.set('n', '<leader>mfd', '<Plug>(MarkdownPlusFootnoteDelete)', opts)
+    vim.keymap.set('n', '<leader>mfg', '<Plug>(MarkdownPlusFootnoteGotoDefinition)', opts)
+    vim.keymap.set('n', '<leader>mfr', '<Plug>(MarkdownPlusFootnoteGotoReference)', opts)
+    vim.keymap.set('n', '<leader>mfn', '<Plug>(MarkdownPlusFootnoteNext)', opts)
+    vim.keymap.set('n', '<leader>mfp', '<Plug>(MarkdownPlusFootnotePrev)', opts)
+    vim.keymap.set('n', '<leader>mfl', '<Plug>(MarkdownPlusFootnoteList)', opts)
+
+    vim.keymap.set('i', '<Tab>', '<Plug>(MarkdownPlusListIndent)', opts)
+    vim.keymap.set('i', '<S-Tab>', '<Plug>(MarkdownPlusListOutdent)', opts)
+
+    -- Obsidian nvim
+    vim.keymap.set(
+      { 'n' },
+      '<leader>mp',
+      '<cmd>Obsidian paste_img<CR><CR><CR>',
+      { desc = 'paste obsidian image', buffer = 0 }
+    )
+    vim.keymap.set({ 'n' }, '<leader>mt', '<cmd>Obsidian template<CR>', { desc = 'templates', buffer = 0 })
+    -- vim.keymap.set({ 'n' }, '<leader>ms', '<cmd>Obsidian quick_switch<CR>', { desc = 'search md files' , buffer = 0})
+    vim.keymap.set({ 'n' }, '<leader>mb', '<cmd>Obsidian backlinks<CR>', { desc = 'backlinks', buffer = 0 })
+    vim.keymap.set({ 'n' }, '<leader>mb', '<cmd>Obsidian search<CR>', { desc = 'search', buffer = 0 })
+    -- vim.keymap.set({ 'n' }, '<leader>md', '<cmd>Obsidian dailies<CR>', { desc = 'daily notes' , buffer = 0})
+    vim.keymap.set({ 'n' }, '<leader>mg', '<cmd>Obsidian tags<CR>', { desc = 'tags', buffer = 0 })
+    vim.keymap.set({ 'n' }, '<leader>mo', '<cmd>Obsidian<CR>', { desc = 'open obsidian general search', buffer = 0 })
+    -- Insert document link
+    vim.keymap.set('n', '<leader>mlp', function()
+      vim.cmd 'normal "+pVsa]Vsa]:'
+      -- "vim.cmd 'normal "+pVsa>Vsa)I[]'
+      -- "vim.cmd 'normal a'
+    end, { noremap = false, silent = true, buffer = 0, desc = 'default markdown links' })
+  end,
+})
+
+-----------------------------------------------------------------------------------------
+-- Colorcheme start
+-----------------------------------------------------------------------------------------
+vim.api.nvim_create_autocmd('FileType', {
+
+  pattern = { 'markdown', 'org', 'orgagenda', 'txt', 'wiki' },
+  callback = function(args)
+    local bufnr = args.buf
+
+    local link_color = '#62aea2'
+    local highlights = {
+      ['SpellBad'] = { sp = '#ff7777', undercurl = true },
+      ['Comment'] = { fg = '#8ca0aa', italic = false },
+
+      ['@markup.strong'] = { fg = '#D19A66', bold = true, force = true },
+      ['@markup.italic'] = { fg = '#7dcfff', italic = false, force = true },
+
+      ['RenderMarkdownBullet'] = { fg = '#E5C111', underline = false },
+      ['@markup.link'] = { fg = link_color }, -- Standard links
+      ['@markup.link.label'] = { fg = link_color }, -- [The Label]
+      ['@markup.link.url'] = { fg = link_color, underline = true }, -- (the/url)
+
+      ['RenderMarkdownLink'] = { fg = link_color, underline = false, force = true },
+      ['RenderMarkdownWikiLink'] = { fg = link_color, underline = false, force = true },
+      ['RenderMarkdownLinkInline'] = { fg = link_color },
+      ['@markup.link.label.markdown_inline'] = { fg = link_color },
+      ['@punctuation.special.markdown'] = { fg = '#6272a4' },
+
+      ['@markup.link.label.symbol'] = { fg = link_color },
+
+      ['rendermarkdownh1bg'] = {
+        fg = '#c47fd5', -- soft purple text
+        bg = '#3e3352',
+        underline = false,
+        bold = true,
+      },
+
+      ['rendermarkdownh2bg'] = { fg = '#7db6b3', bg = '#2a3d6b', bold = true },
+
+      ['rendermarkdownh3bg'] = { fg = '#8ca0aa', bg = '#3a3c8a', bold = true },
+
+      -- ['rendermarkdownh4bg'] = { fg = '#6272a4', bold = true },
+
+      ['@org.keyword.done'] = { fg = '#72A772' },
+      ['@org.timestamp.active'] = { fg = '#c47fd5' },
+      ['@org.keyword.scheduled'] = { fg = '#8A739A', force = true },
+      ['@org.agenda.scheduled'] = { fg = '#adcfff', force = true },
+      ['@org.agenda.deadline'] = { fg = '#FFaaaa' },
+      ['@org.headline.level1'] = {
+        fg = '#c47fd5', -- soft purple text
+        bg = '#3e3352',
+        underline = false,
+      },
+      ['@org.headline.level2'] = { fg = '#7db6b3', bg = '#2a3d6b', bold = true },
+      ['@org.headline.level3'] = { fg = '#8ca0aa', bg = '#3a3c8a', bold = true },
+      ['@org.headline.level4'] = { fg = '#6272a4', bold = true },
+    }
+
+    for group, opts in pairs(highlights) do
+      vim.api.nvim_set_hl(0, group, opts)
+    end
+  end,
+})
+vim.api.nvim_create_autocmd('BufLeave', {
+  buffer = 0,
+  callback = function()
+    vim.api.nvim_win_set_hl_ns(0, 0) -- Reset to default namespace
+  end,
+})
+-----------------------------------------------------------------------------------------
+-- Colorcheme end
+-----------------------------------------------------------------------------------------
 
 ----------------
 -- Markdown end

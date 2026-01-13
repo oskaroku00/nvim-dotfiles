@@ -5,6 +5,7 @@ return {
   ft = { 'markdown', 'txt', 'wiki', 'org' },
   opts = {
     -- Feature toggles (all default: true)
+    filetypes = { 'markdown', 'note', 'org', 'wiki' },
     features = {
       list_management = true, -- default: true (list auto-continue / indent / renumber / checkboxes)
       text_formatting = true, -- default: true (bold/italic/strike/code + clear)

@@ -15,6 +15,7 @@ return {
   },
   {
     'vague2k/vague.nvim',
+    priority = 1000, -- make sure to load this before all the other plugins
     config = function()
       require('vague').setup {
         -- optional configuration here
@@ -59,6 +60,7 @@ return {
           -- type = "#dcaed7",
         },
       }
+      vim.cmd 'colorscheme vague'
     end,
   },
 
@@ -121,7 +123,7 @@ return {
         -- bold = true,
         transparent = false,
       }
-      vim.cmd 'colorscheme ash'
+      -- vim.cmd 'colorscheme ash'
     end,
   },
 }

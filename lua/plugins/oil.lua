@@ -16,9 +16,9 @@ return {
         'size',
       },
       float = {
-        max_width = 0.8,
-        max_height = 0.8,
-        border = 'rounded',
+        max_width = 0.9,
+        max_height = 0.9,
+        border = 'bold',
       },
       view_options = {
         show_hidden = true,
