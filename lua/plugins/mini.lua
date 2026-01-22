@@ -41,35 +41,35 @@ return {
         return '%2l:%-2v'
       end
 
-      local function header()
-        return [[
-     ███╗   ██╗██╗   ██╗███╗   ███╗███╗   ███╗
-     ████╗  ██║██║   ██║████╗ ████║████╗ ████║
-     ██╔██╗ ██║██║   ██║██╔████╔██║██╔████╔██║
-     ██║╚██╗██║╚██╗ ██╔╝██║╚██╔╝██║██║╚██╔╝██║
-     ██║ ╚████║ ╚████╔╝ ██║ ╚═╝ ██║██║ ╚═╝ ██║
-     ╚═╝  ╚═══╝  ╚═══╝  ╚═╝     ╚═╝╚═╝     ╚═╝ 
-  ]]
-      end
-
-      require('mini.sessions').setup {}
-
-      local starter = require 'mini.starter'
-      starter.setup {
-        evaluate_single = true,
-        -- header = header,
-        items = {
-          starter.sections.builtin_actions(),
-          starter.sections.recent_files(5, false),
-          starter.sections.recent_files(5, true),
-          -- starter.sections.sessions(5, true),
-        },
-        content_hooks = {
-          starter.gen_hook.adding_bullet(),
-          starter.gen_hook.indexing('all', { 'Builtin actions' }),
-          starter.gen_hook.padding(3, 2),
-        },
-      }
+      --     local function header()
+      --       return [[
+      --    ███╗   ██╗██╗   ██╗███╗   ███╗███╗   ███╗
+      --    ████╗  ██║██║   ██║████╗ ████║████╗ ████║
+      --    ██╔██╗ ██║██║   ██║██╔████╔██║██╔████╔██║
+      --    ██║╚██╗██║╚██╗ ██╔╝██║╚██╔╝██║██║╚██╔╝██║
+      --    ██║ ╚████║ ╚████╔╝ ██║ ╚═╝ ██║██║ ╚═╝ ██║
+      --    ╚═╝  ╚═══╝  ╚═══╝  ╚═╝     ╚═╝╚═╝     ╚═╝
+      -- ]]
+      --     end
+      --
+      --     require('mini.sessions').setup {}
+      --
+      --     local starter = require 'mini.starter'
+      --     starter.setup {
+      --       evaluate_single = true,
+      --       -- header = header,
+      --       items = {
+      --         starter.sections.builtin_actions(),
+      --         starter.sections.recent_files(5, false),
+      --         starter.sections.recent_files(5, true),
+      --         -- starter.sections.sessions(5, true),
+      --       },
+      --       content_hooks = {
+      --         starter.gen_hook.adding_bullet(),
+      --         starter.gen_hook.indexing('all', { 'Builtin actions' }),
+      --         starter.gen_hook.padding(3, 2),
+      --       },
+      --     }
       -- TODO: chek minin nvim
 
       -- ... and there is more!

@@ -11,6 +11,7 @@ BraceWrapping:
   AfterFunction: true
   AfterControlStatement: false
   AfterStruct: false
+ColumnLimit: 120 
 
 ---
 

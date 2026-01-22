@@ -14,6 +14,13 @@ return {
     italic = false,
   },
   {
+    'nyoom-engineering/oxocarbon.nvim',
+    -- Add in any other configuration;
+    --   event = foo,
+    --   config = bar
+    --   end,
+  },
+  {
     'vague2k/vague.nvim',
     priority = 1000, -- make sure to load this before all the other plugins
     config = function()

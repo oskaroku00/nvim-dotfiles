@@ -12,7 +12,7 @@ return {
         org_agenda_files = '~/Documents/vault/org/**/*',
         org_default_notes_file = '~/Documents/vault/org/refile.org',
         -- org_agenda_files = './org/**/*',
-        org_todo_keywords = { 'TODO', 'NEXT', '|', 'DONE' },
+        org_todo_keywords = { 'LATER', 'TODO', 'NEXT', '|', 'DONE' },
         win_border = 'rounded',
         mappings = {
           note = {},
@@ -31,32 +31,47 @@ return {
           },
           tS = {
             description = 'Todo Schedule',
-            template = '* TODO [B] %?\n SCHEDULED: %^t',
+            template = '* TODO [#A] %?\n SCHEDULED: %^t',
             target = '~/Documents/vault/org/refile.org',
           },
           tw = {
             description = 'Todo Want',
-            template = '* TODO [C] %?',
+            template = '* TODO [#C] %?',
+            target = '~/Documents/vault/org/refile.org',
+          },
+          tt = {
+            description = 'Todo normal, no schedule',
+            template = '* TODO %?\n',
             target = '~/Documents/vault/org/refile.org',
           },
           td = {
             description = 'Todo Dedline',
-            template = '* TODO [A] %?\n DEADLINE: %^t',
+            template = '* TODO [#A] %?\n DEADLINE: %^t',
             target = '~/Documents/vault/org/refile.org',
           },
           ta = {
             description = 'Todo Alarm',
-            template = '* TODO [A] %?      :alarm:\n SCHEDULED: %^T',
+            template = '* TODO [#A] %?      :alarm:\n SCHEDULED: %^T',
             target = '~/Documents/vault/org/refile.org',
           },
           n = {
             description = 'Note',
-            template = '* %?      :note:\n Taken on %U\n',
+            template = '* %?      :note:\n  TAKEN: %U\n',
+            target = '~/Documents/vault/org/thoughts.org',
+          },
+          d = {
+            description = 'Daily',
+            template = '* %U      :daily:\n%?\n',
             target = '~/Documents/vault/org/thoughts.org',
           },
           p = {
             description = 'Project',
-            template = '* %?      :project:\n Taken on %U\n',
+            template = '* LATER %?      :project:\n  TAKEN: %U\n',
+            target = '~/Documents/vault/org/projects-capture.org',
+          },
+          w = {
+            description = 'Want mini project',
+            template = '* LATER %?      :want:\n  TAKEN: %U\n',
             target = '~/Documents/vault/org/projects-capture.org',
           },
         },

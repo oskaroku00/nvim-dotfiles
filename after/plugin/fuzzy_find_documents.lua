@@ -55,4 +55,4 @@ local function open_current_file()
   vim.cmd 'bd' -- 'bd' stands for :bdelete, which closes the current buffer
 end
 
-vim.keymap.set('n', '<leader>O', open_current_file, { desc = 'Open current file like <leader>e gx' })
+vim.keymap.set('n', '<leader>g', open_current_file, { desc = 'Open current file like <leader>e gx' })
