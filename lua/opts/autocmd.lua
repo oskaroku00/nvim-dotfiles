@@ -78,15 +78,36 @@ vim.api.nvim_create_autocmd('FileType', {
     vim.opt_local.formatoptions:append 'q' -- allow formatting comments
     vim.opt_local.formatoptions:append 'n' -- smart wrap for numbered lists
 
-    -- Keybinding: yank text inside [] and create markdown file
+    -- -- Keybinding: yank text inside [] and create markdown file
+    -- vim.keymap.set('n', '<leader>mn', function()
+    --   -- Yank text inside []
+    --   vim.cmd 'normal! yi['
+    --   -- Get yanked text
+    --   local name = vim.fn.getreg '"'
+    --   -- Call the function
+    --   create_md(name)
+    -- end, { noremap = true, silent = true, desc = 'create markdown file within []', buffer = 0 })
+
     vim.keymap.set('n', '<leader>mn', function()
-      -- Yank text inside []
+      -- 1. Yank text inside []
       vim.cmd 'normal! yi['
-      -- Get yanked text
-      local name = vim.fn.getreg '"'
-      -- Call the function
-      create_md(name)
-    end, { noremap = true, silent = true, desc = 'create markdown file within []', buffer = 0 })
+
+      -- 2. Get the yanked text from the unnamed register
+      local raw_name = vim.fn.getreg '"'
+
+      -- 3. Replace spaces with underscores for the filename
+      local formatted_name = string.gsub(raw_name, '%s+', '_')
+
+      -- 4. Replace the text inside [] in the actual buffer
+      -- This uses the Neovim substitute command on the current line
+      vim.cmd('s/\\[' .. vim.pesc(raw_name) .. '\\]/[' .. formatted_name .. ']/')
+
+      -- 5. Create the file using the underscores
+      create_md(formatted_name)
+
+      -- Optional: Clear search highlights from the substitution
+      vim.cmd 'noh'
+    end, { noremap = true, silent = true, desc = 'Create md file and snake_case spaces', buffer = 0 })
 
     -- Insert Mode
     local handlers = require 'markdown-plus.list.handlers'
@@ -158,64 +179,64 @@ vim.api.nvim_create_autocmd('FileType', {
 -----------------------------------------------------------------------------------------
 -- Colorcheme start
 -----------------------------------------------------------------------------------------
-vim.api.nvim_create_autocmd('FileType', {
+local loc_hl_def = vim.api.nvim_create_namespace 'MDORGHL'
+local link_color = '#62aea2'
+local highlights = {
+  ['SpellBad'] = { sp = '#ff7777', undercurl = true },
+  ['Comment'] = { fg = '#8ca0aa', italic = false },
 
+  ['@markup.strong'] = { fg = '#D19A66', bold = true, force = true },
+  ['@markup.italic'] = { fg = '#7dcfff', italic = false, force = true },
+
+  ['RenderMarkdownBullet'] = { fg = '#E5C111', underline = false },
+  ['@markup.link'] = { fg = link_color }, -- Standard links
+  ['@markup.link.label'] = { fg = link_color }, -- [The Label]
+  ['@markup.link.url'] = { fg = link_color, underline = true }, -- (the/url)
+
+  ['RenderMarkdownLink'] = { fg = link_color, underline = false, force = true },
+  ['RenderMarkdownWikiLink'] = { fg = link_color, underline = false, force = true },
+  ['RenderMarkdownLinkInline'] = { fg = link_color },
+  ['@markup.link.label.markdown_inline'] = { fg = link_color },
+  ['@punctuation.special.markdown'] = { fg = '#6272a4' },
+
+  ['@markup.link.label.symbol'] = { fg = link_color },
+
+  ['rendermarkdownh1bg'] = {
+    fg = '#c47fd5', -- soft purple text
+    bg = '#3e3352',
+    underline = false,
+    bold = true,
+  },
+
+  ['rendermarkdownh2bg'] = { fg = '#7db6b3', bg = '#2a3d6b', bold = true },
+
+  ['rendermarkdownh3bg'] = { fg = '#8ca0aa', bg = '#3a3c8a', bold = true },
+
+  -- ['rendermarkdownh4bg'] = { fg = '#6272a4', bold = true },
+
+  ['@org.keyword.done'] = { fg = '#72A772' },
+  ['@org.timestamp.active'] = { fg = '#c47fd5' },
+  ['@org.keyword.scheduled'] = { fg = '#8A739A', force = true },
+  ['@org.agenda.scheduled'] = { fg = '#adcfff', force = true },
+  ['@org.agenda.deadline'] = { fg = '#FFaaaa' },
+  ['@org.headline.level1'] = {
+    fg = '#c47fd5', -- soft purple text
+    bg = '#3e3352',
+    underline = false,
+  },
+  ['@org.headline.level2'] = { fg = '#7db6b3', bg = '#2a3d6b', bold = true },
+  ['@org.headline.level3'] = { fg = '#8ca0aa', bg = '#3a3c8a', bold = true },
+  ['@org.headline.level4'] = { fg = '#6272a4', bold = true },
+}
+
+for group, opts in pairs(highlights) do
+  vim.api.nvim_set_hl(loc_hl_def, group, opts)
+end
+
+vim.api.nvim_create_autocmd({ 'BufEnter', 'FileType' }, {
   pattern = { 'markdown', 'org', 'orgagenda', 'txt', 'wiki' },
   callback = function(args)
-    local bufnr = args.buf
-
-    local link_color = '#62aea2'
-    local highlights = {
-      ['SpellBad'] = { sp = '#ff7777', undercurl = true },
-      ['Comment'] = { fg = '#8ca0aa', italic = false },
-
-      ['@markup.strong'] = { fg = '#D19A66', bold = true, force = true },
-      ['@markup.italic'] = { fg = '#7dcfff', italic = false, force = true },
-
-      ['RenderMarkdownBullet'] = { fg = '#E5C111', underline = false },
-      ['@markup.link'] = { fg = link_color }, -- Standard links
-      ['@markup.link.label'] = { fg = link_color }, -- [The Label]
-      ['@markup.link.url'] = { fg = link_color, underline = true }, -- (the/url)
-
-      ['RenderMarkdownLink'] = { fg = link_color, underline = false, force = true },
-      ['RenderMarkdownWikiLink'] = { fg = link_color, underline = false, force = true },
-      ['RenderMarkdownLinkInline'] = { fg = link_color },
-      ['@markup.link.label.markdown_inline'] = { fg = link_color },
-      ['@punctuation.special.markdown'] = { fg = '#6272a4' },
-
-      ['@markup.link.label.symbol'] = { fg = link_color },
-
-      ['rendermarkdownh1bg'] = {
-        fg = '#c47fd5', -- soft purple text
-        bg = '#3e3352',
-        underline = false,
-        bold = true,
-      },
-
-      ['rendermarkdownh2bg'] = { fg = '#7db6b3', bg = '#2a3d6b', bold = true },
-
-      ['rendermarkdownh3bg'] = { fg = '#8ca0aa', bg = '#3a3c8a', bold = true },
-
-      -- ['rendermarkdownh4bg'] = { fg = '#6272a4', bold = true },
-
-      ['@org.keyword.done'] = { fg = '#72A772' },
-      ['@org.timestamp.active'] = { fg = '#c47fd5' },
-      ['@org.keyword.scheduled'] = { fg = '#8A739A', force = true },
-      ['@org.agenda.scheduled'] = { fg = '#adcfff', force = true },
-      ['@org.agenda.deadline'] = { fg = '#FFaaaa' },
-      ['@org.headline.level1'] = {
-        fg = '#c47fd5', -- soft purple text
-        bg = '#3e3352',
-        underline = false,
-      },
-      ['@org.headline.level2'] = { fg = '#7db6b3', bg = '#2a3d6b', bold = true },
-      ['@org.headline.level3'] = { fg = '#8ca0aa', bg = '#3a3c8a', bold = true },
-      ['@org.headline.level4'] = { fg = '#6272a4', bold = true },
-    }
-
-    for group, opts in pairs(highlights) do
-      vim.api.nvim_set_hl(0, group, opts)
-    end
+    vim.api.nvim_win_set_hl_ns(0, loc_hl_def)
   end,
 })
 vim.api.nvim_create_autocmd('BufLeave', {
@@ -227,7 +248,6 @@ vim.api.nvim_create_autocmd('BufLeave', {
 -----------------------------------------------------------------------------------------
 -- Colorcheme end
 -----------------------------------------------------------------------------------------
-
 ----------------
 -- Markdown end
 ----------------

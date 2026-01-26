@@ -26,13 +26,13 @@ return {
         org_capture_templates = {
           t = 'TODO',
           ts = {
-            description = 'Todo Schedule + Time',
-            template = '* TODO %?\n SCHEDULED: %^T',
+            description = 'Todo Schedule NO time',
+            template = '* TODO %?\n SCHEDULED: %^t',
             target = '~/Documents/vault/org/refile.org',
           },
           tS = {
-            description = 'Todo Schedule',
-            template = '* TODO [#A] %?\n SCHEDULED: %^t',
+            description = 'Todo Schedule + Time',
+            template = '* TODO [#A] %?\n SCHEDULED: %^T',
             target = '~/Documents/vault/org/refile.org',
           },
           tw = {
