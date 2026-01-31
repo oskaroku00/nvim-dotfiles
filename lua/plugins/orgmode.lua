@@ -13,7 +13,11 @@ return {
         org_default_notes_file = '~/Documents/vault/org/refile.org',
         org_archive_location = './archive/%s_archive::',
         -- org_agenda_files = './org/**/*',
-        org_todo_keywords = { 'LATER', 'TODO', 'NEXT', '|', 'DONE' },
+        org_todo_keywords = { 'TODO(t)', 'NEXT(n)', 'WANT(w)', '|', 'DONE(d)', 'LATER(l)' },
+        org_todo_keyword_faces = {
+          LATER = ':foreground #94ABEF :weight bold',
+          -- DELEGATED = ':background #FFFFFF :slant italic :underline on',
+        },
         win_border = 'rounded',
         mappings = {
           note = {},
@@ -21,6 +25,7 @@ return {
             org_archive_subtree = '<C-s>',
             org_add_note = '<Leader>oin',
             org_todo = 't',
+            org_todo_prev = 'T',
           },
         },
         org_capture_templates = {
@@ -37,7 +42,7 @@ return {
           },
           tw = {
             description = 'Todo Want',
-            template = '* TODO [#C] %?',
+            template = '* WANT [#C] %?',
             target = '~/Documents/vault/org/refile.org',
           },
           tt = {
@@ -72,7 +77,7 @@ return {
           },
           w = {
             description = 'Want mini project',
-            template = '* LATER %?      :want:\n  TAKEN: %U\n',
+            template = '* WANT %?      :want:\n  TAKEN: %U\n',
             target = '~/Documents/vault/org/projects-capture.org',
           },
         },
@@ -87,12 +92,12 @@ return {
         require('telescope').extensions.orgmode.search_headings,
         { desc = 'search headings org' }
       )
-      vim.keymap.set(
-        'n',
-        '<leader>ol',
-        require('telescope').extensions.orgmode.insert_link,
-        { desc = 'insert org link' }
-      )
+      -- vim.keymap.set(
+      --   'n',
+      --   '<leader>ol',
+      --   require('telescope').extensions.orgmode.insert_link,
+      --   { desc = 'insert org link' }
+      -- )
       vim.keymap.set({ 'n' }, '<leader>oI', '<cmd>Org indent_mode<CR>', { desc = 'Indent org file' })
     end,
   },

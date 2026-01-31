@@ -23,6 +23,7 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.smartindent = true
 
+vim.opt.colorcolumn = '80'
 -- Border of menus
 -- vim.opt.winborder = 'rounded'
 -- vim.opt.winborder = 'single'
@@ -70,3 +71,9 @@ vim.opt.backup = false
 vim.opt.undodir = os.getenv 'HOME' .. '/.vim/undodir'
 vim.opt.undofile = true
 vim.cmd [[set noswapfile]]
+
+-- Set the background to a dark grey and the text to white
+vim.api.nvim_set_hl(0, 'NormalFloat', { bg = '#232332', fg = '#cdd6f4' })
+
+-- Set the border color
+vim.api.nvim_set_hl(0, 'FloatBorder', { bg = 'none', fg = '#89b4fa' })

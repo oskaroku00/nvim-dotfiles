@@ -11,7 +11,7 @@ BraceWrapping:
   AfterFunction: true
   AfterControlStatement: false
   AfterStruct: false
-ColumnLimit: 120 
+ColumnLimit: 80
 
 ---
 
@@ -25,4 +25,4 @@ UseTab: Never
 # Common Java-specific formatting
 BreakBeforeBraces: Attach
 AllowShortFunctionsOnASingleLine: Empty
-ColumnLimit: 100
+ColumnLimit: 80

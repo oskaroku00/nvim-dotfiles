@@ -96,23 +96,31 @@ return {
         },
         default = { 'lsp', 'path', 'snippets', 'lazydev', 'buffer' },
         providers = {
-          lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
+          snippets = {
+            score_offset = 100, -- the higher the number, the higher the priority
+          },
+          buffer = {
+            name = 'Buffer',
+            enabled = true,
+            max_items = 3,
+            module = 'blink.cmp.sources.buffer',
+            min_keyword_length = 2,
+            score_offset = 90, -- the higher the number, the higher the priority
+          },
+          lazydev = { module = 'lazydev.integrations.blink', score_offset = 90 },
           lsp = {
             name = 'lsp',
             enabled = true,
             module = 'blink.cmp.sources.lsp',
             -- kind = 'LSP',
             min_keyword_length = 0,
-            score_offset = 90, -- the higher the number, the higher the priority
+            score_offset = 80, -- the higher the number, the higher the priority
           },
           orgmode = {
             name = 'Orgmode',
             module = 'orgmode.org.autocompletion.blink',
             fallbacks = { 'buffer' },
             score_offset = 91,
-          },
-          snippets = {
-            score_offset = 80, -- the higher the number, the higher the priority
           },
           path = {
             name = 'Path',
@@ -131,14 +139,6 @@ return {
               end,
               show_hidden_files_by_default = true,
             },
-          },
-          buffer = {
-            name = 'Buffer',
-            enabled = true,
-            max_items = 3,
-            module = 'blink.cmp.sources.buffer',
-            min_keyword_length = 2,
-            score_offset = 60, -- the higher the number, the higher the priority
           },
           dictionary = {
             module = 'blink-cmp-dictionary',
