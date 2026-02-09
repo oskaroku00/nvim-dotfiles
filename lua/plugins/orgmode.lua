@@ -13,9 +13,10 @@ return {
         org_default_notes_file = '~/Documents/vault/org/refile.org',
         org_archive_location = './archive/%s_archive::',
         -- org_agenda_files = './org/**/*',
-        org_todo_keywords = { 'TODO(t)', 'NEXT(n)', 'WANT(w)', '|', 'DONE(d)', 'LATER(l)' },
+        org_todo_keywords = { 'TODO(t)', 'NEXT(n)', 'WANT(w)', 'LATER(l)', 'POSPONED(p)', '|', 'DONE(d)' },
         org_todo_keyword_faces = {
           LATER = ':foreground #94ABEF :weight bold',
+          POSPONED = ':foreground #C45BEF :weight bold',
           -- DELEGATED = ':background #FFFFFF :slant italic :underline on',
         },
         win_border = 'rounded',
@@ -42,7 +43,7 @@ return {
           },
           tw = {
             description = 'Todo Want',
-            template = '* WANT [#C] %?',
+            template = '* POSPONED [#C] %?',
             target = '~/Documents/vault/org/refile.org',
           },
           tt = {
@@ -77,7 +78,7 @@ return {
           },
           w = {
             description = 'Want mini project',
-            template = '* WANT %?      :want:\n  TAKEN: %U\n',
+            template = '* POSPONED %?      :want:\n  TAKEN: %U\n',
             target = '~/Documents/vault/org/projects-capture.org',
           },
         },

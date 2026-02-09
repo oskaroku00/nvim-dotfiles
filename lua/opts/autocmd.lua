@@ -96,7 +96,7 @@ vim.api.nvim_create_autocmd('FileType', {
       local raw_name = vim.fn.getreg '"'
 
       -- 3. Replace spaces with underscores for the filename
-      local formatted_name = string.gsub(raw_name, '%s+', '_')
+      local formatted_name = string.gsub(raw_name, '%s+', '-')
 
       -- 4. Replace the text inside [] in the actual buffer
       -- This uses the Neovim substitute command on the current line
@@ -107,7 +107,7 @@ vim.api.nvim_create_autocmd('FileType', {
 
       -- Optional: Clear search highlights from the substitution
       vim.cmd 'noh'
-    end, { noremap = true, silent = true, desc = 'Create md file and snake_case spaces', buffer = 0 })
+    end, { noremap = true, silent = true, desc = 'Create md file and replace spaces', buffer = 0 })
 
     -- Insert Mode
     local handlers = require 'markdown-plus.list.handlers'
@@ -167,6 +167,12 @@ vim.api.nvim_create_autocmd('FileType', {
     -- vim.keymap.set({ 'n' }, '<leader>md', '<cmd>Obsidian dailies<CR>', { desc = 'daily notes' , buffer = 0})
     vim.keymap.set({ 'n' }, '<leader>mg', '<cmd>Obsidian tags<CR>', { desc = 'tags', buffer = 0 })
     vim.keymap.set({ 'n' }, '<leader>mo', '<cmd>Obsidian<CR>', { desc = 'open obsidian general search', buffer = 0 })
+    vim.keymap.set(
+      { 'n' },
+      '<leader>mr',
+      '<cmd>Obsidian rename<CR>',
+      { desc = 'open obsidian general search', buffer = 0 }
+    )
     -- Insert document link
     vim.keymap.set('n', '<leader>mlp', function()
       vim.cmd 'normal "+pVsa]Vsa]:'

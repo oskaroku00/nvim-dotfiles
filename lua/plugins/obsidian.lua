@@ -15,19 +15,6 @@ return {
           name = 'personal-vault',
           path = '~/Documents/vault/md',
         },
-        -- {
-        -- name = "no-vault",
-        -- path = function()
-        --   -- alternatively use the CWD:
-        --   -- return assert(vim.fn.getcwd())
-        --   return assert(vim.fs.dirname(vim.api.nvim_buf_get_name(0)))
-        -- end,
-        -- overrides = {
-        --   notes_subdir = vim.NIL, -- have to use 'vim.NIL' instead of 'nil'
-        --   new_notes_location = "current_dir",
-        --   templates = {
-        --     folder = vim.NIL,
-        --   },
       },
       frontmatter = {
         enabled = false,
@@ -45,16 +32,14 @@ return {
         min_chars = 1,
         create_new = false,
       },
+      footer = {
+        enabled = false,
+      },
       new_notes_location = 'current_dir',
       legacy_commands = false,
       ui = { enabled = false },
       attachments = {
         folder = '/assets',
-        -- img_text_func = function(path)
-        --   local name = vim.fs.basename(tostring(path))
-        --   local encoded_name = require("obsidian.util").urlencode(name)
-        --   return string.format("![%s](%s)", name, encoded_name)
-        -- end,
       },
       templates = {
         folder = 'templates',
