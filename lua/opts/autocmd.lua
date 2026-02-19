@@ -96,7 +96,7 @@ vim.api.nvim_create_autocmd('FileType', {
       local raw_name = vim.fn.getreg '"'
 
       -- 3. Replace spaces with underscores for the filename
-      local formatted_name = string.gsub(raw_name, '%s+', '-')
+      local formatted_name = string.gsub(raw_name, '%s+', '_')
 
       -- 4. Replace the text inside [] in the actual buffer
       -- This uses the Neovim substitute command on the current line
@@ -163,7 +163,7 @@ vim.api.nvim_create_autocmd('FileType', {
     vim.keymap.set({ 'n' }, '<leader>mt', '<cmd>Obsidian template<CR>', { desc = 'templates', buffer = 0 })
     -- vim.keymap.set({ 'n' }, '<leader>ms', '<cmd>Obsidian quick_switch<CR>', { desc = 'search md files' , buffer = 0})
     vim.keymap.set({ 'n' }, '<leader>mb', '<cmd>Obsidian backlinks<CR>', { desc = 'backlinks', buffer = 0 })
-    vim.keymap.set({ 'n' }, '<leader>mb', '<cmd>Obsidian search<CR>', { desc = 'search', buffer = 0 })
+    vim.keymap.set({ 'n' }, '<leader>ms', '<cmd>Obsidian search<CR>', { desc = 'search', buffer = 0 })
     -- vim.keymap.set({ 'n' }, '<leader>md', '<cmd>Obsidian dailies<CR>', { desc = 'daily notes' , buffer = 0})
     vim.keymap.set({ 'n' }, '<leader>mg', '<cmd>Obsidian tags<CR>', { desc = 'tags', buffer = 0 })
     vim.keymap.set({ 'n' }, '<leader>mo', '<cmd>Obsidian<CR>', { desc = 'open obsidian general search', buffer = 0 })
@@ -174,11 +174,16 @@ vim.api.nvim_create_autocmd('FileType', {
       { desc = 'open obsidian general search', buffer = 0 }
     )
     -- Insert document link
-    vim.keymap.set('n', '<leader>mlp', function()
-      vim.cmd 'normal "+pVsa]Vsa]:'
-      -- "vim.cmd 'normal "+pVsa>Vsa)I[]'
-      -- "vim.cmd 'normal a'
-    end, { noremap = false, silent = true, buffer = 0, desc = 'default markdown links' })
+    -- vim.keymap.set('n', '<leader>mlp', function()
+    --   vim.cmd 'normal "*pI./'
+    --   vim.cmd 'normal Vsa]Vsa]:'
+    -- end, { noremap = false, silent = true, buffer = 0, desc = 'default markdown links' })
+    vim.keymap.set(
+      'n',
+      '<leader>mlp',
+      ':read !~/.config/scripts/yazi_copy_file_path_relative.sh<CR>',
+      { desc = 'Insert relative path from clipboard' }
+    )
   end,
 })
 

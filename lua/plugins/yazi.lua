@@ -15,6 +15,7 @@ return {
         '<cmd>Yazi<cr>',
         desc = 'Open yazi at the current file',
       },
+      ['<C-y>'] = { 'yazi_copy_relative_path', mode = { 'n', 'i' } },
       {
         -- Open in the current working directory
         '<leader>l',
