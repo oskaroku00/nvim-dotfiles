@@ -162,7 +162,6 @@ vim.api.nvim_create_autocmd('FileType', {
     )
     vim.keymap.set({ 'n' }, '<leader>mt', '<cmd>Obsidian template<CR>', { desc = 'templates', buffer = 0 })
     -- vim.keymap.set({ 'n' }, '<leader>ms', '<cmd>Obsidian quick_switch<CR>', { desc = 'search md files' , buffer = 0})
-    vim.keymap.set({ 'n' }, '<leader>mb', '<cmd>Obsidian backlinks<CR>', { desc = 'backlinks', buffer = 0 })
     vim.keymap.set({ 'n' }, '<leader>ms', '<cmd>Obsidian search<CR>', { desc = 'search', buffer = 0 })
     -- vim.keymap.set({ 'n' }, '<leader>md', '<cmd>Obsidian dailies<CR>', { desc = 'daily notes' , buffer = 0})
     vim.keymap.set({ 'n' }, '<leader>mg', '<cmd>Obsidian tags<CR>', { desc = 'tags', buffer = 0 })
@@ -173,11 +172,16 @@ vim.api.nvim_create_autocmd('FileType', {
       '<cmd>Obsidian rename<CR>',
       { desc = 'open obsidian general search', buffer = 0 }
     )
+    -- vim.keymap.set({ 'n' }, '<leader>mb', '<cmd>Obsidian backlinks<CR>', { desc = 'backlinks', buffer = 0 })
+    vim.keymap.set('n', '<leader>mb', function()
+      vim.cmd 'normal gg'
+      vim.cmd 'Obsidian backlinks'
+    end, { noremap = false, silent = true, buffer = 0, desc = 'buffer backlinks' })
+    vim.keymap.set('n', '<leader>mit', function()
+      vim.cmd 'normal I:TODO:'
+      vim.cmd 'normal gcc0bi'
+    end, { noremap = false, silent = true, buffer = 0, desc = 'inset markdown TODO for search' })
     -- Insert document link
-    -- vim.keymap.set('n', '<leader>mlp', function()
-    --   vim.cmd 'normal "*pI./'
-    --   vim.cmd 'normal Vsa]Vsa]:'
-    -- end, { noremap = false, silent = true, buffer = 0, desc = 'default markdown links' })
     vim.keymap.set(
       'n',
       '<leader>mlp',

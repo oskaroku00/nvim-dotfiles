@@ -40,6 +40,11 @@ ls.add_snippets('org', {
   }),
 })
 ls.add_snippets('markdown', {
+  s('ttTODO', {
+    t '<!-- :TODO: ',
+    i(1),
+    t ' -->',
+  }),
   s('ww', {
     t '## ',
     i(1),
