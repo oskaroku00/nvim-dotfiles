@@ -157,7 +157,7 @@ vim.api.nvim_create_autocmd('FileType', {
     vim.keymap.set(
       { 'n' },
       '<leader>mp',
-      '<cmd>Obsidian paste_img<CR><CR><CR>',
+      ':Obsidian paste_img<CR><CR><CR>I- <Esc>',
       { desc = 'paste obsidian image', buffer = 0 }
     )
     vim.keymap.set({ 'n' }, '<leader>mt', '<cmd>Obsidian template<CR>', { desc = 'templates', buffer = 0 })
