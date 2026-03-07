@@ -74,12 +74,12 @@ return {
           p = {
             description = 'Project',
             template = '* LATER %?      :project:\n  TAKEN: %U\n',
-            target = '~/Documents/vault/org/projects-capture.org',
+            target = '~/Documents/vault/org/projects.org',
           },
           w = {
             description = 'Want mini project',
             template = '* POSPONED %?      :want:\n  TAKEN: %U\n',
-            target = '~/Documents/vault/org/projects-capture.org',
+            target = '~/Documents/vault/org/projects.org',
           },
         },
       }
