@@ -57,10 +57,11 @@ vim.keymap.set({ 'n' }, '<Leader>cr', '<cmd>CompetiTest run<CR>', { desc = 'Comp
 vim.keymap.set({ 'n' }, '<Leader>cp', '<cmd>CompetiTest receive problem<CR>', { desc = 'Competitive recieve problem' })
 
 -- greatest remap ever
-vim.keymap.set('x', '<Leader>p', [["_dP]])
-vim.keymap.set({ 'n', 'v' }, '<Leader>d', [["_d]])
-vim.keymap.set({ 'n' }, '<Leader>p', [["+p]], { desc = 'paste system clipboard' })
+vim.keymap.set('x', '<Leader>p', [["_dP]], { desc = 'paste wihtout overriding reg' })
+vim.keymap.set({ 'n', 'v' }, '<Leader>d', [["_d]], { desc = 'delete without override' })
+-- vim.keymap.set({ 'n' }, '<Leader>p', [["+p]], { desc = 'paste system clipboard' })
 vim.keymap.set({ 'v', 'x', 'n' }, '<C-y>', [["+y]], { desc = 'System clipboard yank.' })
+vim.keymap.set({ 'v', 'x', 'n' }, '<Leader>y', [["+y]], { desc = 'System clipboard yank.' })
 vim.keymap.set({ 'n', 'v', 'x' }, ';', ':', { desc = 'Remap ; to :' })
 vim.keymap.set({ 'n', 'v', 'x' }, ':', ';', { desc = 'Remap : to ;' })
 
