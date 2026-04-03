@@ -7,9 +7,11 @@ return {
     ---@module 'render-markdown'
     ---@type render.md.UserConfig
     opts = {
-      completions = {
-        blink = { enabled = true },
-      },
+      -- completions = {
+      --   blink = { enabled = true },
+      -- },
+      completions = { lsp = { enabled = true } },
+      file_types = { 'markdown' },
       -- link = {
       --   -- This tells the plugin to use the highlight groups we just defined
       --   highlight = 'RenderMarkdownLink',

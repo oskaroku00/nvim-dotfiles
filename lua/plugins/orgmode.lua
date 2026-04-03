@@ -9,8 +9,8 @@ return {
     },
     config = function()
       require('orgmode').setup {
-        org_agenda_files = '~/Documents/vault/org/**/*',
-        org_default_notes_file = '~/Documents/vault/org/refile.org',
+        org_agenda_files = '~/Documents/org/**/*',
+        org_default_notes_file = '~/Documents/org/refile.org',
         org_archive_location = './archive/%s_archive::',
         -- org_agenda_files = './org/**/*',
         org_todo_keywords = { 'TODO(t)', 'NEXT(n)', 'WANT(w)', 'LATER(l)', 'POSPONED(p)', '|', 'DONE(d)' },
@@ -34,52 +34,52 @@ return {
           ts = {
             description = 'Todo Schedule NO time',
             template = '* TODO %?\n SCHEDULED: %^t',
-            target = '~/Documents/vault/org/refile.org',
+            target = '~/Documents/org/refile.org',
           },
           tS = {
             description = 'Todo Schedule + Time',
             template = '* TODO [#A] %?\n SCHEDULED: %^T',
-            target = '~/Documents/vault/org/refile.org',
+            target = '~/Documents/org/refile.org',
           },
           tw = {
             description = 'Todo Want',
             template = '* POSPONED [#C] %?',
-            target = '~/Documents/vault/org/refile.org',
+            target = '~/Documents/org/refile.org',
           },
           tt = {
             description = 'Todo normal, no schedule',
             template = '* TODO %?\n',
-            target = '~/Documents/vault/org/refile.org',
+            target = '~/Documents/org/refile.org',
           },
           td = {
             description = 'Todo Dedline',
             template = '* TODO [#A] %?\n DEADLINE: %^t',
-            target = '~/Documents/vault/org/refile.org',
+            target = '~/Documents/org/refile.org',
           },
           ta = {
             description = 'Todo Alarm',
             template = '* TODO [#A] %?      :alarm:\n SCHEDULED: %^T',
-            target = '~/Documents/vault/org/refile.org',
+            target = '~/Documents/org/refile.org',
           },
           n = {
             description = 'Note',
             template = '* %?      :note:\n  TAKEN: %U\n',
-            target = '~/Documents/vault/org/thoughts.org',
+            target = '~/Documents/org/thoughts.org',
           },
           d = {
             description = 'Daily',
             template = '* %U      :daily:\n%?\n',
-            target = '~/Documents/vault/org/thoughts.org',
+            target = '~/Documents/org/thoughts.org',
           },
           p = {
             description = 'Project',
             template = '* LATER %?      :project:\n  TAKEN: %U\n',
-            target = '~/Documents/vault/org/projects.org',
+            target = '~/Documents/org/projects.org',
           },
           w = {
             description = 'Want mini project',
             template = '* POSPONED %?      :want:\n  TAKEN: %U\n',
-            target = '~/Documents/vault/org/projects.org',
+            target = '~/Documents/org/projects.org',
           },
         },
       }
