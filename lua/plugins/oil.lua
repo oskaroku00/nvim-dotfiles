@@ -13,6 +13,7 @@ return {
       columns = {
         'permissions',
         'icon',
+        'mtime',
         'size',
       },
       float = {
@@ -23,6 +24,9 @@ return {
       view_options = {
         show_hidden = true,
       },
+      keymaps = { ['<C-h>'] = false },
+      delete_to_trash = true,
+      skip_confirm_for_simple_edits = true,
     },
     dependencies = { { 'nvim-mini/mini.icons', opts = {} } },
     lazy = false,

@@ -1,25 +1,4 @@
 return {
-  { 'gbprod/nord.nvim' },
-  {
-    'sainnhe/gruvbox-material',
-    config = function()
-      vim.g.gruvbox_material_background = 'hard'
-    end,
-  },
-  {
-    'zenbones-theme/zenbones.nvim',
-    dependencies = 'rktjmp/lush.nvim',
-    lazy = false,
-    priority = 1000,
-    italic = false,
-  },
-  {
-    'nyoom-engineering/oxocarbon.nvim',
-    -- Add in any other configuration;
-    --   event = foo,
-    --   config = bar
-    --   end,
-  },
   {
     'vague2k/vague.nvim',
     priority = 1000, -- make sure to load this before all the other plugins
@@ -57,14 +36,14 @@ return {
         colors = {
           func = '#bc96b0',
           keyword = '#787bab',
-          -- string = "#d4bd98",
+          -- string = '#d4bd98',
           string = '#8a739a',
           -- string = "#f2e6ff",
           -- number = "#f2e6ff",
           -- string = "#d8d5b1",
           bold = '#aaaaaa',
           number = '#8f729e',
-          -- type = "#dcaed7",
+          -- type = '#dcaed7',
         },
       }
       vim.cmd 'colorscheme vague'
@@ -105,32 +84,6 @@ return {
         transparent = false,
       }
       -- vim.cmd 'colorscheme onedark_dark'
-    end,
-  },
-  { 'EdenEast/nightfox.nvim' },
-  lazy = false, -- make sure we load this during startup if it is your main colorscheme
-  priority = 1000, -- make sure to load this before all the other plugins
-  config = function()
-    require('nightfox').setup {
-      -- optional configuration here
-      italic = true,
-      bold = true,
-      transparent = false,
-    }
-    -- vim.cmd 'colorscheme carbonfox'
-  end,
-  {
-    'drewxs/ash.nvim',
-    lazy = false,
-    priority = 1000,
-    config = function()
-      require('nightfox').setup {
-        -- optional configuration here
-        -- italic = true,
-        -- bold = true,
-        transparent = false,
-      }
-      -- vim.cmd 'colorscheme ash'
     end,
   },
 }

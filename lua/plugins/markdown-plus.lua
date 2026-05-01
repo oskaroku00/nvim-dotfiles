@@ -18,11 +18,6 @@ return {
       table = true, -- default: true (table creation & editing)
     },
 
-    -- TOC window configuration
-    toc = {
-      initial_depth = 2, -- default: 2 (range 1-6) depth shown in :Toc window and generated TOC
-    },
-
     -- Callouts configuration
     callouts = {
       default_type = 'NOTE', -- default: "NOTE"  default callout type when inserting

@@ -1,3 +1,8 @@
+-- Help command
+-- leader K show help window over text
+-- g< show error message spilled in complete buffer
+-- ctrl-] in help docks to navigate to index
+
 -- Keymaps cheatsheet
 -- Up = '<Up> ',
 -- Down = '<Down> ',
@@ -46,7 +51,8 @@ vim.keymap.set(
   { desc = 'todo list search' }
 )
 
-vim.keymap.set({ 'n' }, '<Leader>e', '<cmd>Oil --float<CR>', { desc = 'oil explorer' })
+vim.keymap.set({ 'n' }, '<Leader>e', '<cmd>Oil <CR>', { desc = 'oil explorer' })
+-- vim.keymap.set({ 'n' }, '<Leader>e', '<cmd>Oil --float<CR>', { desc = 'oil explorer' })
 -- vim.keymap.set({ 'n' }, '<Leader>e', '<cmd>Oil<CR>', { desc = 'oil explorer' })
 vim.keymap.set({ 'n' }, '<Leader>w', '<Cmd>update<CR>', { desc = 'write' })
 vim.keymap.set({ 'n', 'i', 'v' }, '<C-q>', '<Cmd>w<CR><Cmd>bd<CR>', { desc = 'delete buffer' })
@@ -55,12 +61,12 @@ vim.keymap.set({ 'n' }, '<Leader>Q', '<Cmd>wqa<CR>', { desc = 'quit all force' }
 
 vim.keymap.set({ 'n' }, '<Leader>cr', '<cmd>CompetiTest run<CR>', { desc = 'Competitive run' })
 vim.keymap.set({ 'n' }, '<Leader>cp', '<cmd>CompetiTest receive problem<CR>', { desc = 'Competitive recieve problem' })
-
--- greatest remap ever
-vim.keymap.set('x', '<Leader>p', [["_dP]], { desc = 'paste wihtout overriding reg' })
-vim.keymap.set({ 'n', 'v' }, '<Leader>d', [["_d]], { desc = 'delete without override' })
--- vim.keymap.set({ 'n' }, '<Leader>p', [["+p]], { desc = 'paste system clipboard' })
-vim.keymap.set({ 'v', 'x', 'n' }, '<C-y>', [["+y]], { desc = 'System clipboard yank.' })
+vim.opt.foldmethod = 'expr' -- Use expression for folding
+vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()' -- Use treesitter for folding
+vim.opt.foldlevel = 99 -- Keep all folds open by default
+-- vim.keymap.set('x', '<Leader>P', [["_dP]], { desc = 'paste wihtout overriding reg' })
+-- vim.keymap.set({ 'n', 'v' }, '<Leader>d', [["_d]], { desc = 'delete without override' })
+vim.keymap.set({ 'n' }, '<Leader>p', [["+p]], { desc = 'paste system clipboard' })
 vim.keymap.set({ 'v', 'x', 'n' }, '<Leader>y', [["+y]], { desc = 'System clipboard yank.' })
 vim.keymap.set({ 'n', 'v', 'x' }, ';', ':', { desc = 'Remap ; to :' })
 vim.keymap.set({ 'n', 'v', 'x' }, ':', ';', { desc = 'Remap : to ;' })
@@ -69,15 +75,7 @@ vim.keymap.set('n', '<leader>r', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 
 vim.keymap.set('n', '<leader>x', '<cmd>!chmod +x %<CR>', { silent = true, desc = 'executable' })
 
--- vim.keymap.set(
---   { 'n', 'v', 'x' },
---   '<leader>E',
---   '<Cmd>edit $MYVIMRC<CR>',
---   { desc = 'Edit vimrc' .. vim.fn.expand '$MYVIMRC' }
--- )
-
-vim.keymap.set('n', 'J', 'mzJ`z')
-
+vim.keymap.set('n', 'J', 'mzJ`z', { desc = 'join lines with space' })
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = 'moves lines up' })
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'moves lines down' })
 

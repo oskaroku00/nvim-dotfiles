@@ -63,13 +63,13 @@ return {
           },
           n = {
             description = 'Note',
-            template = '* %?      :note:\n  TAKEN: %U\n',
-            target = '~/Documents/org/thoughts.org',
+            template = '** %?      :note:\n  TAKEN: %U\n',
+            target = '~/Documents/org/daily.org',
           },
           d = {
             description = 'Daily',
-            template = '* %U      :daily:\n%?\n',
-            target = '~/Documents/org/thoughts.org',
+            template = '** %U      :daily:\n%?\n',
+            target = '~/Documents/org/daily.org',
           },
           p = {
             description = 'Project',
@@ -99,7 +99,7 @@ return {
       --   require('telescope').extensions.orgmode.insert_link,
       --   { desc = 'insert org link' }
       -- )
-      vim.keymap.set({ 'n' }, '<leader>oI', '<cmd>Org indent_mode<CR>', { desc = 'Indent org file' })
     end,
   },
+  vim.lsp.enable 'org',
 }
