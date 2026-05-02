@@ -1,42 +1,38 @@
-return {
+vim.pack.add {
+  'https://github.com/yousefhadder/markdown-plus.nvim',
+}
+require('markdown-plus').setup {
+  filetypes = { 'markdown', 'note', 'org', 'wiki' },
+  features = {
+    list_management = true, -- default: true (list auto-continue / indent / renumber / checkboxes)
+    text_formatting = true, -- default: true (bold/italic/strike/code + clear)
+    headers_toc = true, -- default: true (headers nav + TOC generation & window)
+    links = true, -- default: true (insert/edit/convert/reference links)
+    images = true, -- default: true (insert/edit image links + toggle link/image)
+    quotes = true, -- default: true (blockquote toggle)
+    callouts = true, -- default: true (GFM callouts/admonitions)
+    code_block = true, -- default: true (visual selection -> fenced block)
+    table = true, -- default: true (table creation & editing)
+  },
 
-  'yousefhadder/markdown-plus.nvim',
+  -- Callouts configuration
+  callouts = {
+    default_type = 'NOTE', -- default: "NOTE"  default callout type when inserting
+    custom_types = {}, -- default: {}  add custom types (e.g., { "DANGER", "SUCCESS" })
+  },
 
-  ft = { 'markdown', 'txt', 'wiki', 'org' },
-  opts = {
-    -- Feature toggles (all default: true)
-    filetypes = { 'markdown', 'note', 'org', 'wiki' },
-    features = {
-      list_management = true, -- default: true (list auto-continue / indent / renumber / checkboxes)
-      text_formatting = true, -- default: true (bold/italic/strike/code + clear)
-      headers_toc = true, -- default: true (headers nav + TOC generation & window)
-      links = true, -- default: true (insert/edit/convert/reference links)
-      images = true, -- default: true (insert/edit image links + toggle link/image)
-      quotes = true, -- default: true (blockquote toggle)
-      callouts = true, -- default: true (GFM callouts/admonitions)
-      code_block = true, -- default: true (visual selection -> fenced block)
-      table = true, -- default: true (table creation & editing)
+  -- Table configuration
+  table = {
+    auto_format = true, -- default: true  auto format table after operations
+    default_alignment = 'left', -- default: "left"  alignment used for new columns
+    confirm_destructive = true, -- default: true  confirm before transpose/sort operations
+    keymaps = { -- Table-specific keymaps (prefix based)
+      enabled = false, -- default: true  provide table keymaps
+      -- prefix = '<leader>t', -- default: "<leader>t"  prefix for table ops
+      insert_mode_navigation = true, -- default: true  Alt+hjkl cell navigation
     },
-
-    -- Callouts configuration
-    callouts = {
-      default_type = 'NOTE', -- default: "NOTE"  default callout type when inserting
-      custom_types = {}, -- default: {}  add custom types (e.g., { "DANGER", "SUCCESS" })
-    },
-
-    -- Table configuration
-    table = {
-      auto_format = true, -- default: true  auto format table after operations
-      default_alignment = 'left', -- default: "left"  alignment used for new columns
-      confirm_destructive = true, -- default: true  confirm before transpose/sort operations
-      keymaps = { -- Table-specific keymaps (prefix based)
-        enabled = false, -- default: true  provide table keymaps
-        -- prefix = '<leader>t', -- default: "<leader>t"  prefix for table ops
-        insert_mode_navigation = true, -- default: true  Alt+hjkl cell navigation
-      },
-    },
-    keymaps = {
-      enabled = false, -- default: true  set false to disable ALL default maps (use <Plug>)
-    },
+  },
+  keymaps = {
+    enabled = false, -- default: true  set false to disable ALL default maps (use <Plug>)
   },
 }

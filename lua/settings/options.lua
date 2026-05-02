@@ -1,18 +1,18 @@
 vim.opt.statusline = '%<%f %h%w%m%r%=%-14.(%l,%c%V%) %b %P'
 -- disable mouse popup yet keep mouse enabled
--- vim.cmd [[
---   aunmenu PopUp
---   autocmd! nvim.popupmenu
--- ]]
+vim.cmd [[
+  aunmenu PopUp
+  autocmd! nvim.popupmenu
+]]
 
 -- Only highlight with treesitter
 -- vim.cmd 'syntax off'
--- vim.api.nvim_create_autocmd('FileType', {
---   pattern = { '<filetype>' },
---   callback = function()
---     vim.treesitter.start()
---   end,
--- })
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { '<filetype>' },
+  callback = function()
+    vim.treesitter.start()
+  end,
+})
 
 require('vim._core.ui2').enable {
   enable = true, -- Whether to enable or disable the UI.
@@ -37,6 +37,22 @@ require('vim._core.ui2').enable {
     },
   },
 }
+
+vim.diagnostic.config {
+  update_in_insert = false,
+  severity_sort = true,
+  float = { border = 'rounded', source = 'if_many' },
+  -- underline = { severity = { min = vim.diagnostic.severity.WARN } },
+  underline = false,
+
+  -- Can switch between these as you prefer
+  virtual_text = false, -- Text shows up at the end of the line
+  virtual_lines = false, -- Text shows up underneath the line, with virtual lines
+
+  -- Auto open the float, so you can easily read the errors when jumping with `[d` and `]d`
+  jump = { float = true },
+}
+
 -- vim.cmd.packadd 'cfilter'
 -- ;im.cmd 'packadd nvim.undotree'
 -- vim.cmd 'packadd nvim.diftool'
@@ -68,9 +84,9 @@ vim.opt.smartindent = true
 
 vim.opt.colorcolumn = '80'
 -- Border of menus
--- vim.opt.winborder = 'rounded'
+vim.opt.winborder = 'rounded'
 -- vim.opt.winborder = 'single'
-vim.opt.winborder = 'bold'
+-- vim.opt.winborder = 'bold'
 
 -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
 vim.o.ignorecase = true
@@ -104,7 +120,7 @@ vim.o.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.o.scrolloff = 10
-vim.o.sidescrolloff = 10
+vim.o.sidescrolloff = 15
 
 vim.o.confirm = true
 

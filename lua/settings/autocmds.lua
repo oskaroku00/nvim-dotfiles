@@ -1,3 +1,21 @@
+-- close some filetypes with <q>
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = {
+    'help',
+    'lspinfo',
+    'checkhealth',
+    'qf',
+    'nvim.undotree',
+    'grug-far',
+  },
+  callback = function(event)
+    vim.keymap.set('n', 'q', function()
+      vim.cmd 'close'
+    end, { buffer = event.buf, silent = true })
+  end,
+})
+
 -- restore cursor to file position in previous editing session
 vim.api.nvim_create_autocmd('BufReadPost', {
   callback = function(args)
@@ -79,8 +97,8 @@ vim.api.nvim_create_autocmd('FileType', {
     vim.opt_local.spelllang = 'en_us,es'
     vim.opt_local.spell = true
 
-    -- vim.opt_local.conceallevel = 2
-    -- vim.opt_local.concealcursor = 'nc'
+    vim.opt_local.conceallevel = 2
+    vim.opt_local.concealcursor = 'nc'
 
     vim.opt_local.wrap = true
     vim.opt_local.linebreak = true
@@ -208,7 +226,7 @@ local highlights = {
   ['@markup.link.label.symbol'] = { fg = link_color },
 
   ['rendermarkdownh1bg'] = {
-    fg = '#c47fd5', -- soft purple text
+    fg = '#c17fd5', -- soft purple text
     bg = '#3e3352',
     underline = false,
     bold = true,

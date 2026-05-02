@@ -52,6 +52,7 @@ vim.keymap.set(
 )
 
 vim.keymap.set({ 'n' }, '<Leader>e', '<cmd>Oil <CR>', { desc = 'oil explorer' })
+vim.keymap.set({ 'n' }, '<Leader>u', '<cmd>Undotree <CR>', { desc = 'undotree' })
 -- vim.keymap.set({ 'n' }, '<Leader>e', '<cmd>Oil --float<CR>', { desc = 'oil explorer' })
 -- vim.keymap.set({ 'n' }, '<Leader>e', '<cmd>Oil<CR>', { desc = 'oil explorer' })
 vim.keymap.set({ 'n' }, '<Leader>w', '<Cmd>update<CR>', { desc = 'write' })
@@ -75,6 +76,8 @@ vim.keymap.set('n', '<leader>r', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 
 vim.keymap.set('n', '<leader>x', '<cmd>!chmod +x %<CR>', { silent = true, desc = 'executable' })
 
+vim.keymap.set('n', '<leader>z', '<cmd>ZenMode<CR>', { silent = true, desc = 'Zen Mode' })
+
 vim.keymap.set('n', 'J', 'mzJ`z', { desc = 'join lines with space' })
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = 'moves lines up' })
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'moves lines down' })
@@ -87,6 +90,8 @@ vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'scroll centre' })
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>d', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+-- Show diagnostic in a floating window
+vim.keymap.set('n', 'zd', vim.diagnostic.open_float, { desc = 'Show diagnostic under cursor' })
 
 -- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
 -- or just use <C-\><C-n> to exit terminal mode
