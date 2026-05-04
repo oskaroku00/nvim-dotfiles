@@ -14,20 +14,11 @@ require('zen-mode').setup {
 
   window = {
     backdrop = 1,
-    width = 0.65,
+    width = 86,
   },
 
   plugins = {
-    options = { enabled = true, ruler = false, showcmd = false },
-    tmux = { enabled = true },
-    kitty = { enabled = false, font = '+2' },
+    options = { enabled = true, ruler = false, showcmd = false, laststatus = 0, },
+    tmux = { enabled = false },
   },
-
-  -- on_open = function()
-  --   pcall(function() require('twilight').enable() end)
-  -- end,
-  --
-  -- on_close = function()
-  --   pcall(function() require('twilight').disable() end)
-  -- end,
 }

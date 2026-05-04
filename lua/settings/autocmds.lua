@@ -97,8 +97,8 @@ vim.api.nvim_create_autocmd('FileType', {
     vim.opt_local.spelllang = 'en_us,es'
     vim.opt_local.spell = true
 
-    vim.opt_local.conceallevel = 2
-    vim.opt_local.concealcursor = 'nc'
+    -- vim.opt_local.conceallevel = 2
+    -- vim.opt_local.concealcursor = 'nc'
 
     vim.opt_local.wrap = true
     vim.opt_local.linebreak = true
@@ -141,7 +141,7 @@ vim.api.nvim_create_autocmd('FileType', {
     -- Navigate headings
     vim.keymap.set('n', 'gn', '<Plug>(MarkdownPlusNextHeader)', opts)
     vim.keymap.set('n', 'gp', '<Plug>(MarkdownPlusPrevHeader)', opts)
-    vim.keymap.set('n', '<CR>', checkbox.toggle_checkbox_insert, opts)
+    -- vim.keymap.set('n', '<CR>', checkbox.toggle_checkbox_insert, opts)
     -- Normal mode
     vim.keymap.set('n', '<leader>mr', '<Plug>(MarkdownPlusRenumberLists)', opts)
     vim.keymap.set('n', '<leader>md', '<Plug>(MarkdownPlusDebugLists)', opts)
@@ -223,8 +223,6 @@ local highlights = {
   ['@markup.link.label.markdown_inline'] = { fg = link_color },
   ['@punctuation.special.markdown'] = { fg = '#6272a4' },
 
-  ['@markup.link.label.symbol'] = { fg = link_color },
-
   ['rendermarkdownh1bg'] = {
     fg = '#c17fd5', -- soft purple text
     bg = '#3e3352',
@@ -236,7 +234,7 @@ local highlights = {
 
   ['rendermarkdownh3bg'] = { fg = '#8ca0aa', bg = '#3a3c8a', bold = true },
 
-  -- ['rendermarkdownh4bg'] = { fg = '#6272a4', bold = true },
+  ['rendermarkdownh5bg'] = { fg = '#6272a4', bold = true },
 
   ['@org.keyword.done'] = { fg = '#72A772' },
   ['@org.timestamp.active'] = { fg = '#c47fd5' },

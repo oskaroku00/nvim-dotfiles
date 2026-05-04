@@ -35,7 +35,7 @@ require('obsidian').setup {
   },
   new_notes_location = 'current_dir',
   legacy_commands = false,
-  ui = { enabled = false },
+  ui = { enable = false },
   attachments = {
     folder = '/assets',
   },
@@ -48,4 +48,5 @@ require('obsidian').setup {
     create_new = false,
     order = { ' ', 'x' },
   },
+  
 }

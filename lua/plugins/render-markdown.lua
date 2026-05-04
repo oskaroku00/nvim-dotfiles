@@ -20,4 +20,7 @@ require('render-markdown').setup {
       conceal = false,
     },
   },
+  link = {
+    enabled = false,
+  },
 }
