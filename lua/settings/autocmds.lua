@@ -212,31 +212,33 @@ local highlights = {
   ['@markup.strong'] = { fg = '#D19A66', bold = true, force = true },
   ['@markup.italic'] = { fg = '#7dcfff', italic = false, force = true },
 
-  ['RenderMarkdownBullet'] = { fg = '#E5C111', underline = false },
-  ['@markup.link'] = { fg = link_color }, -- Standard links
-  ['@markup.link.label'] = { fg = link_color }, -- [The Label]
-  ['@markup.link.url'] = { fg = link_color, underline = true }, -- (the/url)
+  ['RenderMarkdownBullet'] = { fg = '#8ca0aa', underline = false },
+  -- ['@markup.link'] = { fg = link_color }, -- Standard links
+  -- ['@markup.link.label'] = { fg = link_color }, -- [The Label]
+  -- ['@markup.link.url'] = { fg = link_color, underline = true }, -- (the/url)
+  --
+  -- ['RenderMarkdownLink'] = { fg = link_color, underline = false, force = true },
+  -- ['RenderMarkdownWikiLink'] = { fg = link_color, underline = false, force = true },
+  -- ['RenderMarkdownLinkInline'] = { fg = link_color },
+  -- ['@markup.link.label.markdown_inline'] = { fg = link_color },
+  -- ['@punctuation.special.markdown'] = { fg = '#6272a4' },
 
-  ['RenderMarkdownLink'] = { fg = link_color, underline = false, force = true },
-  ['RenderMarkdownWikiLink'] = { fg = link_color, underline = false, force = true },
-  ['RenderMarkdownLinkInline'] = { fg = link_color },
-  ['@markup.link.label.markdown_inline'] = { fg = link_color },
-  ['@punctuation.special.markdown'] = { fg = '#6272a4' },
-
-  ['rendermarkdownh1bg'] = {
-    fg = '#c17fd5', -- soft purple text
-    bg = '#3e3352',
-    underline = false,
-    bold = true,
-  },
-
-  ['rendermarkdownh2bg'] = { fg = '#7db6b3', bg = '#2a3d6b', bold = true },
-
-  ['rendermarkdownh3bg'] = { fg = '#8ca0aa', bg = '#3a3c8a', bold = true },
-
-  ['rendermarkdownh5bg'] = { fg = '#6272a4', bold = true },
-
-  ['@org.keyword.done'] = { fg = '#72A772' },
+  -- ['rendermarkdownh1bg'] = {
+  --   fg = '#c17fd5', -- soft purple text
+  --   bg = '#3e3352',
+  --   underline = false,
+  --   bold = true,
+  -- },
+  --
+  -- ['rendermarkdownh2bg'] = { fg = '#7db6b3', bg = '#2a3d6b', bold = true },
+  -- ['rendermarkdownh1bg'] = { fg = '#7db6b3', bg = '#2a3d6b', bold = true },
+  --
+  ['rendermarkdownh1bg'] = { fg = '#8ca0aa', bg = '#3a3c8a', bold = true },
+  -- ['rendermarkdownh3bg'] = { fg = '#8ca0aa', bg = '#3a3c8a', bold = true },
+  --
+  -- ['rendermarkdownh5bg'] = { fg = '#6272a4', bold = true },
+  --
+  ['@org.keyword.done'] = { fg = '#729772' },
   ['@org.timestamp.active'] = { fg = '#c47fd5' },
   ['@org.keyword.scheduled'] = { fg = '#8A739A', force = true },
   ['@org.agenda.scheduled'] = { fg = '#adcfff', force = true },
