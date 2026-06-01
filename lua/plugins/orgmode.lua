@@ -2,7 +2,7 @@ vim.pack.add {
   'https://github.com/nvim-orgmode/orgmode',
   'https://github.com/nvim-telescope/telescope.nvim',
   'https://github.com/nvim-orgmode/telescope-orgmode.nvim',
-  'https://github.com/nvim-orgmode/org-bullets.nvim',
+  -- 'https://github.com/nvim-orgmode/org-bullets.nvim',
 }
 require('orgmode').setup {
   org_agenda_files = '~/Documents/org/**/*',
@@ -15,7 +15,6 @@ require('orgmode').setup {
     POSPONED = ':foreground #C45BEF :weight bold',
     -- DELEGATED = ':background #FFFFFF :slant italic :underline on',
   },
-  win_border = 'rounded',
   mappings = {
     note = {},
     org = {
@@ -79,16 +78,9 @@ require('orgmode').setup {
     },
   },
 }
-require('org-bullets').setup()
+-- require('org-bullets').setup()
 
 
-require('telescope').setup()
+require('telescope').setup({})
 require('telescope').load_extension 'orgmode'
 vim.keymap.set('n', '<leader>so', require('telescope').extensions.orgmode.search_headings, { desc = 'search headings org' })
--- vim.keymap.set(
---   'n',
---   '<leader>ol',
---   require('telescope').extensions.orgmode.insert_link,
---   { desc = 'insert org link' }
--- )
-vim.lsp.enable 'org'

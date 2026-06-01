@@ -6,7 +6,7 @@
       "version": "2.0.0 - 3.0.0"
     },
     "blink-cmp-dictionary": {
-      "rev": "35142bba869b869715e91a99d2f46bcf93fca4ae",
+      "rev": "17ea03ba5c296310b9f74587b52fde1b04d84c1a",
       "src": "https://github.com/Kaiser-Yang/blink-cmp-dictionary"
     },
     "blink.cmp": {
@@ -18,7 +18,7 @@
       "src": "https://github.com/xeluxee/competitest.nvim"
     },
     "conform.nvim": {
-      "rev": "dca1a190aa85f9065979ef35802fb77131911106",
+      "rev": "18aeab3d63d350dcf44d64c462cc489a3412af40",
       "src": "https://github.com/stevearc/conform.nvim"
     },
     "fidget.nvim": {
@@ -42,11 +42,11 @@
       "src": "https://github.com/lukas-reineke/indent-blankline.nvim"
     },
     "markdown-plus.nvim": {
-      "rev": "b320c8d81761daa5b3bdb68772878be1299c7284",
+      "rev": "ffd156b1ffab8547390bf6ca641ae42cf5f286d8",
       "src": "https://github.com/yousefhadder/markdown-plus.nvim"
     },
     "mason-lspconfig.nvim": {
-      "rev": "0c2823e0418f3d9230ff8b201c976e84de1cb401",
+      "rev": "7b01e2974a47d489bb92f47a41e4c0088ea8f86e",
       "src": "https://github.com/mason-org/mason-lspconfig.nvim"
     },
     "mason-nvim-dap.nvim": {
@@ -58,11 +58,11 @@
       "src": "https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim"
     },
     "mason.nvim": {
-      "rev": "cb8445f8ce85d957416c106b780efd51c6298f89",
+      "rev": "cbf8d285e1462dd24acf3507817be2bbcb035919",
       "src": "https://github.com/mason-org/mason.nvim"
     },
     "mini.nvim": {
-      "rev": "0f339bf5c93f392dc5d2417d47d7b9edc5f96fe8",
+      "rev": "264b5c8fc6e82212af0dc5c345145cfa916efeb6",
       "src": "https://github.com/nvim-mini/mini.nvim"
     },
     "nui.nvim": {
@@ -70,7 +70,7 @@
       "src": "https://github.com/MunifTanjim/nui.nvim"
     },
     "nvim-autopairs": {
-      "rev": "59bce2eef357189c3305e25bc6dd2d138c1683f5",
+      "rev": "7b9923abad60b903ece7c52940e1321d39eccc79",
       "src": "https://github.com/windwp/nvim-autopairs"
     },
     "nvim-dap": {
@@ -86,11 +86,11 @@
       "src": "https://github.com/rcarriga/nvim-dap-ui"
     },
     "nvim-lint": {
-      "rev": "eab58b48eb11d7745c11c505e0f3057165902461",
+      "rev": "d48f3a76189d03b2239f6df1b2f7e3fa8353743b",
       "src": "https://github.com/mfussenegger/nvim-lint"
     },
     "nvim-lspconfig": {
-      "rev": "31026a13eefb20681124706a79fc1df6bf11ab27",
+      "rev": "246572944c2a1e2a646c2e7609ff619b0fe74c18",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-nio": {
@@ -103,11 +103,11 @@
       "version": "'main'"
     },
     "nvim-web-devicons": {
-      "rev": "4fc505ac7bd7692824a142e96e5f529c133862f8",
+      "rev": "7d8dad2c837fcdf2e65997e68657c1a21c568074",
       "src": "https://github.com/nvim-tree/nvim-web-devicons"
     },
     "obsidian.nvim": {
-      "rev": "dec6573816767eaa9596cabc1593f45a2f7821ee",
+      "rev": "ed6f386abe83e4dafa9afecf50cd9d9fff072a07",
       "src": "https://github.com/obsidian-nvim/obsidian.nvim",
       "version": ">=0.0.0"
     },
@@ -124,7 +124,7 @@
       "src": "https://github.com/nvim-orgmode/org-bullets.nvim"
     },
     "orgmode": {
-      "rev": "19f10a627febde24ecb7bb9714d3472ade69949c",
+      "rev": "98b3a2b7ff1475ddd921803df54558da22a0f354",
       "src": "https://github.com/nvim-orgmode/orgmode"
     },
     "plenary.nvim": {
@@ -132,7 +132,7 @@
       "src": "https://github.com/nvim-lua/plenary.nvim"
     },
     "render-markdown.nvim": {
-      "rev": "3f3eea97b80839f629c951ca660ffd125bfa5b34",
+      "rev": "629eb9533ec989d9d5c6cab8f3ad5372422c24e0",
       "src": "https://github.com/MeanderingProgrammer/render-markdown.nvim"
     },
     "snacks.nvim": {
@@ -144,11 +144,11 @@
       "src": "https://github.com/abecodes/tabout.nvim"
     },
     "telescope-fzf-native.nvim": {
-      "rev": "6fea601bd2b694c6f2ae08a6c6fab14930c60e2c",
+      "rev": "b25b749b9db64d375d782094e2b9dce53ad53a40",
       "src": "https://github.com/nvim-telescope/telescope-fzf-native.nvim"
     },
     "telescope-orgmode.nvim": {
-      "rev": "0a9872f7932bcf4d08a8278b1493119ffcdc83c6",
+      "rev": "214fe56e105bb3d0638f33320ed959911a1bfcb1",
       "src": "https://github.com/nvim-orgmode/telescope-orgmode.nvim"
     },
     "telescope-ui-select.nvim": {
@@ -156,7 +156,7 @@
       "src": "https://github.com/nvim-telescope/telescope-ui-select.nvim"
     },
     "telescope.nvim": {
-      "rev": "ec009610d5d259ec59a6edf0219ef3f7ee4732e5",
+      "rev": "7d324792b7943e4aa16ad007212e6acc6f9fe335",
       "src": "https://github.com/nvim-telescope/telescope.nvim"
     },
     "tiny-inline-diagnostic.nvim": {
