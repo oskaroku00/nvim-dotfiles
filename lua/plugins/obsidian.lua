@@ -24,12 +24,6 @@ require('obsidian').setup {
     template = 'daily',
     workdays_only = false,
   },
-  completion = {
-    nvim_cmp = false,
-    blink = true,
-    min_chars = 1,
-    create_new = false,
-  },
   footer = {
     enabled = false,
   },

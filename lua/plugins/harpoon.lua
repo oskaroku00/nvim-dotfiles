@@ -1,3 +1,37 @@
+-- -- 1. Install dependencies and the plugin
+-- vim.pack.add {
+--   -- Dependency required by Harpoon
+--   'https://github.com/nvim-lua/plenary.nvim',
+--
+--   -- Harpoon explicitly using the active harpoon2 branch
+--   {
+--     src = 'https://github.com/ThePrimeagen/harpoon',
+--     branch = 'harpoon2',
+--   },
+-- }
+--
+-- -- 2. Safely load and configure Harpoon
+-- local status_ok, harpoon = pcall(require, 'harpoon')
+-- if not status_ok then return end
+--
+-- harpoon:setup()
+--
+-- -- 3. Set up your keybindings
+-- vim.keymap.set('n', '<leader>a', function() harpoon:list():add() end, { desc = 'Add to Harpoon' })
+-- vim.keymap.set('n', '<leader>H', function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = 'Toggle Harpoon Menu' })
+--
+-- -- Example quick-navigation keys
+-- vim.keymap.set('n', '<C-h>', function() harpoon:list():select(1) end)
+-- vim.keymap.set('n', '<C-t>', function() harpoon:list():select(2) end)
+-- vim.keymap.set('n', '<C-n>', function() harpoon:list():select(3) end)
+-- vim.keymap.set('n', '<C-s>', function() harpoon:list():select(4) end)
+-- for i = 1, 9 do
+--   table.insert(keys, {
+--     '<leader>' .. i,
+--     function() require('harpoon'):list():select(i) end,
+--     desc = 'Harpoon to File ' .. i,
+--   })
+-- end
 -- vim.pack.add {
 --   'https://github.com/nvim-lua/plenary.nvim',
 --   'https://github.com/ThePrimeagen/harpoon',

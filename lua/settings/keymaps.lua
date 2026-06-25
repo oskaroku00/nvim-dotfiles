@@ -62,8 +62,8 @@ vim.keymap.set({ 'n' }, '<Leader>Q', '<Cmd>wqa<CR>', { desc = 'quit all force' }
 
 vim.keymap.set({ 'n' }, '<Leader>cr', '<cmd>CompetiTest run<CR>', { desc = 'Competitive run' })
 vim.keymap.set({ 'n' }, '<Leader>cp', '<cmd>CompetiTest receive problem<CR>', { desc = 'Competitive recieve problem' })
-vim.opt.foldmethod = 'expr' -- Use expression for folding
-vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()' -- Use treesitter for folding
+-- vim.opt.foldmethod = 'expr' -- Use expression for folding
+-- vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()' -- Use treesitter for folding
 vim.opt.foldlevel = 99 -- Keep all folds open by default
 -- vim.keymap.set('x', '<Leader>P', [["_dP]], { desc = 'paste wihtout overriding reg' })
 -- vim.keymap.set({ 'n', 'v' }, '<Leader>d', [["_d]], { desc = 'delete without override' })
@@ -91,7 +91,8 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>d', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 -- Show diagnostic in a floating window
-vim.keymap.set('n', 'gd', vim.diagnostic.open_float, { desc = 'Show diagnostic under cursor' })
+vim.keymap.set('n', 'gD', vim.diagnostic.open_float, { desc = 'Show diagnostic under cursor', noremap = true, silent = true  })
+vim.keymap.set('n', 'zd', vim.diagnostic.open_float, { desc = 'Show diagnostic under cursor', noremap = true, silent = true  })
 
 -- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
 -- or just use <C-\><C-n> to exit terminal mode

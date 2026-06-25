@@ -8,10 +8,10 @@ UseTab: Never
 # C-specific brace and layout preferences
 BreakBeforeBraces: Custom
 BraceWrapping:
-  AfterFunction: true
+  AfterFunction: false
   AfterControlStatement: false
   AfterStruct: false
-ColumnLimit: 80
+ColumnLimit: 120
 
 ---
 
@@ -25,4 +25,4 @@ UseTab: Never
 # Common Java-specific formatting
 BreakBeforeBraces: Attach
 AllowShortFunctionsOnASingleLine: Empty
-ColumnLimit: 80
+ColumnLimit: 120
