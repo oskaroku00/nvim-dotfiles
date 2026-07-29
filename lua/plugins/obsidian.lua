@@ -8,6 +8,7 @@ vim.pack.add {
   'https://github.com/nvim-telescope/telescope.nvim',
 }
 require('obsidian').setup {
+  legacy_commands = false,
   workspaces = {
     {
       name = 'personal-vault',
@@ -25,10 +26,9 @@ require('obsidian').setup {
     workdays_only = false,
   },
   footer = {
-    enabled = false,
+    enabled = true,
   },
   new_notes_location = 'current_dir',
-  legacy_commands = false,
   ui = { enable = false },
   attachments = {
     folder = '/assets',

@@ -24,6 +24,7 @@ require('orgmode').setup {
       org_todo_prev = 'T',
     },
   },
+  vim.lsp.enable('org'),
   org_capture_templates = {
     t = 'TODO',
     ts = {

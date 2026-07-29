@@ -1,3 +1,15 @@
+-- LSP diagnostics
+-- Auto open float diagnostic error
+vim.api.nvim_create_autocmd('CursorHold', {
+  pattern = '*',
+  callback = function()
+    vim.diagnostic.open_float {
+      scope = 'cursor',
+      focus = false,
+    }
+  end,
+})
+
 -- close some filetypes with <q>
 
 vim.api.nvim_create_autocmd('FileType', {
