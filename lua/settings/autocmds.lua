@@ -120,26 +120,26 @@ vim.api.nvim_create_autocmd('FileType', {
     vim.opt_local.formatoptions:append 'q' -- allow formatting comments
     vim.opt_local.formatoptions:append 'n' -- smart wrap for numbered lists
 
-    vim.keymap.set('n', '<leader>mn', function()
-      -- 1. Yank text inside []
-      vim.cmd 'normal! yi['
-
-      -- 2. Get the yanked text from the unnamed register
-      local raw_name = vim.fn.getreg '"'
-
-      -- 3. Replace spaces with underscores for the filename
-      local formatted_name = string.gsub(raw_name, '%s+', '_')
-
-      -- 4. Replace the text inside [] in the actual buffer
-      -- This uses the Neovim substitute command on the current line
-      vim.cmd('s/\\[' .. vim.pesc(raw_name) .. '\\]/[' .. formatted_name .. ']/')
-
-      -- 5. Create the file using the underscores
-      create_md(formatted_name)
-
-      -- Optional: Clear search highlights from the substitution
-      vim.cmd 'noh'
-    end, { noremap = true, silent = true, desc = 'Create md file and replace spaces', buffer = 0 })
+    -- vim.keymap.set('n', '<leader>mn', function()
+    --   -- 1. Yank text inside []
+    --   vim.cmd 'normal! yi['
+    --
+    --   -- 2. Get the yanked text from the unnamed register
+    --   local raw_name = vim.fn.getreg '"'
+    --
+    --   -- 3. Replace spaces with underscores for the filename
+    --   local formatted_name = string.gsub(raw_name, '%s+', '_')
+    --
+    --   -- 4. Replace the text inside [] in the actual buffer
+    --   -- This uses the Neovim substitute command on the current line
+    --   vim.cmd('s/\\[' .. vim.pesc(raw_name) .. '\\]/[' .. formatted_name .. ']/')
+    --
+    --   -- 5. Create the file using the underscores
+    --   create_md(formatted_name)
+    --
+    --   -- Optional: Clear search highlights from the substitution
+    --   vim.cmd 'noh'
+    -- end, { noremap = true, silent = true, desc = 'Create md file and replace spaces', buffer = 0 })
 
     -- opening files gx
     vim.keymap.set('n', 'gx', smart_gx, opts)
@@ -190,14 +190,17 @@ vim.api.nvim_create_autocmd('FileType', {
 
     -- Obsidian nvim
     vim.keymap.set({ 'n' }, '<leader>mp', ':Obsidian paste_img<CR><CR><CR>I- <Esc>', { desc = 'paste obsidian image', buffer = 0 })
-    vim.keymap.set({ 'n' }, '<leader>mt', '<cmd>Obsidian template<CR>', { desc = 'templates', buffer = 0 })
+    vim.keymap.set({ 'n' }, '<leader>mt', '<cmd>Obsidian tags<CR>', { desc = 'tags', buffer = 0 })
+    vim.keymap.set({ 'n' }, '<leader>mm', '<cmd>Obsidian<CR>', { desc = 'open obsidian general search', buffer = 0 })
+    vim.keymap.set({ 'n' }, '<leader>mo', '<cmd>Obsidian open<CR>', { desc = 'open in obsidian', buffer = 0 })
+    vim.keymap.set({ 'n' }, '<leader>mr', '<cmd>Obsidian rename<CR>', { desc = 'rename note', buffer = 0 })
+    vim.keymap.set({ 'n' }, '<leader>ms', '<cmd>Obsidian quick_switch<CR>', { desc = 'quick switch note', buffer = 0 })
+
+    -- vim.keymap.set({ 'n' }, '<leader>mt', '<cmd>Obsidian template<CR>', { desc = 'templates', buffer = 0 })
     -- vim.keymap.set({ 'n' }, '<leader>ms', '<cmd>Obsidian quick_switch<CR>', { desc = 'search md files' , buffer = 0})
-    vim.keymap.set({ 'n' }, '<leader>ms', '<cmd>Obsidian search<CR>', { desc = 'search', buffer = 0 })
     -- vim.keymap.set({ 'n' }, '<leader>md', '<cmd>Obsidian dailies<CR>', { desc = 'daily notes' , buffer = 0})
-    vim.keymap.set({ 'n' }, '<leader>mg', '<cmd>Obsidian tags<CR>', { desc = 'tags', buffer = 0 })
-    vim.keymap.set({ 'n' }, '<leader>mo', '<cmd>Obsidian<CR>', { desc = 'open obsidian general search', buffer = 0 })
-    vim.keymap.set({ 'n' }, '<leader>mr', '<cmd>Obsidian rename<CR>', { desc = 'open obsidian general search', buffer = 0 })
     -- vim.keymap.set({ 'n' }, '<leader>mb', '<cmd>Obsidian backlinks<CR>', { desc = 'backlinks', buffer = 0 })
+
     vim.keymap.set('n', '<leader>mb', function()
       vim.cmd 'normal gg'
       vim.cmd 'Obsidian backlinks'
