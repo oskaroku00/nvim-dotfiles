@@ -6,7 +6,7 @@ vim.pack.add {
 }
 local org_location = '~/org/'
 require('orgmode').setup {
-  org_agenda_files = '~/org/**/',
+  org_agenda_files = '~/org/*',
   org_default_notes_file = '~/org/refile.org',
   org_archive_location = './archive/%s_archive::',
   -- org_agenda_files = './org/**/*',
