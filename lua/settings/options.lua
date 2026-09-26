@@ -51,11 +51,13 @@ require('vim._core.ui2').enable {
 --   jump = { float = true },
 -- }
 vim.diagnostic.config {
+    
   update_in_insert = false,
   severity_sort = true,
   signs = true,
   float = { border = 'rounded', source = 'if_many' },
-  underline = { severity = { min = vim.diagnostic.severity.WARN } },
+  underline = { severity = { max = vim.diagnostic.severity.ERROR } },
+  -- underline = false,
 
   -- Can switch between these as you prefer
   virtual_text = false, -- Text shows up at the end of the line
@@ -131,7 +133,8 @@ vim.o.splitbelow = true
 
 -- Display spaces
 vim.o.list = true
-vim.opt.listchars = { tab = '<->', trail = '·', nbsp = '␣' }
+-- vim.opt.listchars = { tab = '<->', trail = '·', nbsp = '␣' }
+  vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
 -- Preview substitutions live, as you type!
 vim.o.inccommand = 'split'

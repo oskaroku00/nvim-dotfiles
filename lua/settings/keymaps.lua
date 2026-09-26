@@ -42,7 +42,14 @@ vim.keymap.set('i', '<C-BS>', '<C-w>', { noremap = false, silent = true })
 vim.keymap.set('i', '<C-H>', '<C-w>', { noremap = false, silent = true })
 
 vim.keymap.set({ 'n' }, '<leader>sc', '<cmd>Telescope colorscheme<CR>', { desc = 'todo list search' })
-
+vim.keymap.set('n', '<leader>S', '<cmd>setlocal spell!<CR>', { noremap = true, silent = true, desc = 'Toggle spellcheck' })
+vim.keymap.set('n', '<leader>L', function()
+  -- Get the current diagnostic configuration
+  local current_underline = vim.diagnostic.config().underline
+  
+  -- Toggle the underline setting
+  vim.diagnostic.config({ underline = not current_underline })
+end, { noremap = true, silent = true, desc = 'Toggle diagnostic underlines' })
 -- Markdown nvim search todos
 vim.keymap.set(
   { 'n' },

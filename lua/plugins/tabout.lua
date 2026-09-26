@@ -17,8 +17,8 @@ require('tabout').setup {
     { open = '"', close = '"' },
     { open = '`', close = '`' },
     { open = '(', close = ')' },
-    -- { open = '[', close = ']' },
-    -- { open = "{", close = "}" },
+    { open = '[', close = ']' },
+    { open = "{", close = "}" },
   },
   ignore_beginning = true, --[[ if the cursor is at the beginning of a filled element it will rather tab out than shift the content ]]
   exclude = { 'markdown', 'org', 'orgmode', 'orgagenda' }, -- tabout will ignore these filetypes

@@ -17,6 +17,11 @@
       "rev": "b42c06ca308906f07912ba9aff015ac2c0831f85",
       "src": "https://github.com/xeluxee/competitest.nvim"
     },
+    "compile-mode.nvim": {
+      "rev": "c53f063b86a31866294053cc42ae44541c10aa77",
+      "src": "https://github.com/ej-shafran/compile-mode.nvim",
+      "version": "5.0.0 - 6.0.0"
+    },
     "conform.nvim": {
       "rev": "619363c30309d29ffa631e67c8183f2a72caa373",
       "src": "https://github.com/stevearc/conform.nvim"
