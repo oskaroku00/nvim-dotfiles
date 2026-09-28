@@ -32,6 +32,7 @@
 -- F10 = '<F10>',
 -- F11 = '<F11>',
 -- F12 = '<F12>',
+
 for i = 1, 8 do
   vim.keymap.set({ 'n', 't' }, 'g' .. i, '<Cmd>tabnext ' .. i .. '<CR>')
 end
@@ -42,6 +43,7 @@ vim.keymap.set('i', '<C-BS>', '<C-w>', { noremap = false, silent = true })
 vim.keymap.set('i', '<C-H>', '<C-w>', { noremap = false, silent = true })
 
 vim.keymap.set({ 'n' }, '<leader>sc', '<cmd>Telescope colorscheme<CR>', { desc = 'todo list search' })
+
 vim.keymap.set('n', '<leader>S', '<cmd>setlocal spell!<CR>', { noremap = true, silent = true, desc = 'Toggle spellcheck' })
 vim.keymap.set('n', '<leader>L', function()
   -- Get the current diagnostic configuration
@@ -60,22 +62,30 @@ vim.keymap.set(
 
 vim.keymap.set({ 'n' }, '<Leader>e', '<cmd>Oil <CR>', { desc = 'oil explorer' })
 vim.keymap.set({ 'n' }, '<Leader>u', '<cmd>Undotree <CR>', { desc = 'undotree' })
--- vim.keymap.set({ 'n' }, '<Leader>e', '<cmd>Oil --float<CR>', { desc = 'oil explorer' })
--- vim.keymap.set({ 'n' }, '<Leader>e', '<cmd>Oil<CR>', { desc = 'oil explorer' })
+
 vim.keymap.set({ 'n' }, '<Leader>w', '<Cmd>update<CR>', { desc = 'write' })
 vim.keymap.set({ 'n', 'i', 'v' }, '<C-q>', '<Cmd>w<CR><Cmd>bd<CR>', { desc = 'delete buffer' })
 vim.keymap.set({ 'n' }, '<Leader>q', '<Cmd>q<CR>', { desc = 'quit' })
 vim.keymap.set({ 'n' }, '<Leader>Q', '<Cmd>wqa<CR>', { desc = 'quit all force' })
 
-vim.keymap.set({ 'n' }, '<Leader>cr', '<cmd>CompetiTest run<CR>', { desc = 'Competitive run' })
-vim.keymap.set({ 'n' }, '<Leader>cp', '<cmd>CompetiTest receive problem<CR>', { desc = 'Competitive recieve problem' })
--- vim.opt.foldmethod = 'expr' -- Use expression for folding
--- vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()' -- Use treesitter for folding
-vim.opt.foldlevel = 99 -- Keep all folds open by default
+-- Competitest
+vim.keymap.set({ 'n' }, '<Leader>cp', '<cmd>CompetiTest run<CR>', { desc = 'Competitive run' })
+vim.keymap.set({ 'n' }, '<Leader>cP', '<cmd>CompetiTest receive problem<CR>', { desc = 'Competitive recieve problem' })
+
+-- Compile mode nvim
+-- Trigger the compilation prompt (similar to Emacs' M-x compile)
+vim.keymap.set("n", "<leader>cc", "<cmd>Compile<CR>", { desc = "Compile" })
+-- Quickly re-run the last compilation without prompting
+vim.keymap.set("n", "<leader>cr", "<cmd>Recompile<CR>", { desc = "Recompile" })
+-- Navigate through errors in your current files
+-- vim.keymap.set("n", "]e", "<cmd>NextError<CR>", { desc = "Next Compile Error" })
+-- vim.keymap.set("n", "[e", "<cmd>PrevError<CR>", { desc = "Prev Compile Error" })
+
 -- vim.keymap.set('x', '<Leader>P', [["_dP]], { desc = 'paste wihtout overriding reg' })
 -- vim.keymap.set({ 'n', 'v' }, '<Leader>d', [["_d]], { desc = 'delete without override' })
 vim.keymap.set({ 'n' }, '<Leader>p', [["+p]], { desc = 'paste system clipboard' })
 vim.keymap.set({ 'v', 'x', 'n' }, '<Leader>y', [["+y]], { desc = 'System clipboard yank.' })
+
 vim.keymap.set({ 'n', 'v', 'x' }, ';', ':', { desc = 'Remap ; to :' })
 vim.keymap.set({ 'n', 'v', 'x' }, ':', ';', { desc = 'Remap : to ;' })
 
@@ -86,8 +96,8 @@ vim.keymap.set('n', '<leader>x', '<cmd>!chmod +x %<CR>', { silent = true, desc =
 vim.keymap.set('n', '<leader>z', '<cmd>ZenMode<CR>', { silent = true, desc = 'Zen Mode' })
 
 vim.keymap.set('n', 'J', 'mzJ`z', { desc = 'join lines with space' })
-vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = 'moves lines up' })
-vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'moves lines down' })
+-- vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = 'moves lines up' })
+-- vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'moves lines down' })
 
 vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'scroll centre' })
 vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'scroll centre' })
