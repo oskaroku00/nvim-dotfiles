@@ -18,7 +18,7 @@ require('zen-mode').setup {
   },
 
   plugins = {
-    options = { enabled = true, ruler = false, showcmd = false, laststatus = 0, },
+    options = { enabled = true, ruler = true, showcmd = false, laststatus = 0, },
     tmux = { enabled = false },
   },
 }

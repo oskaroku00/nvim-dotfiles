@@ -1,17 +1,17 @@
 vim.pack.add {
   'https://github.com/vague2k/vague.nvim',
   'https://github.com/olimorris/onedarkpro.nvim',
+  'https://github.com/jacoborus/tender.vim'
 }
+-- require('tender').setup {}
 require('vague').setup {
-  -- optional configuration here
-  -- transparent = true,
   style = {
-    -- "none" is the same thing as default. But "italic" and "bold" are also valid options
+  --   -- "none" is the same thing as default. But "italic" and "bold" are also valid options
     boolean = 'none',
     number = 'none',
     float = 'none',
     error = 'none',
-    comments = 'none',
+    comments = 'bold',
     conditionals = 'none',
     functions = 'none',
     headings = 'bold',
@@ -33,15 +33,15 @@ require('vague').setup {
     builtin_variables = 'none',
   },
   colors = {
-    func = '#bc96b0',
-    keyword = '#787bab',
+    -- func = '#bc96b0',
+    -- keyword = '#787bab',
     -- string = '#d4bd98',
-    string = '#8a739a',
+    -- string = '#8a739a',
     -- string = "#f2e6ff",
     -- number = "#f2e6ff",
     -- string = "#d8d5b1",
-    bold = '#aaaaaa',
-    number = '#8f729e',
+    -- bold = '#FFFFFF',
+    -- number = '#8f729e',
     -- type = '#dcaed7',
   },
 }

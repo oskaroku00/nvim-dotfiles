@@ -112,7 +112,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 ---@type table<string, vim.lsp.Config>
 local servers = {
   clangd = {},
-  ast_grep = {},
+  -- ast_grep = {},
   jdtls = {},
   -- gopls = {},
   -- pyright = {},

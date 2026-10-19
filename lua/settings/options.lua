@@ -1,4 +1,81 @@
-vim.opt.statusline = '%<%f %h%w%m%r%=%-14.(%l,%c%V%) %b %P'
+-- custom statusline
+-- vim.opt.statusline = '%<%f %h%w%m%r%=%-14.(%l,%c%V%) %b %P'
+
+-- local statusline = {
+--   ' %t',
+--   '%r',
+--   '%m',
+--   '%=',
+--   '%{&filetype}',
+--   ' %2p%%',
+--   ' %3l:%-2c ',
+--   'char[%b]'
+--
+-- }
+--
+-- vim.o.statusline = table.concat(statusline, '')
+
+local cmp = {} -- statusline components
+
+--- highlight pattern
+-- This has three parts: 
+-- 1. the highlight group
+-- 2. text content
+-- 3. special sequence to restore highlight: %*
+-- Example pattern: %#SomeHighlight#some-text%*
+local hi_pattern = '%%#%s#%s%%*'
+
+function _G._statusline_component(name)
+  return cmp[name]()
+end
+
+function cmp.diagnostic_status()
+  local ok = ' λ '
+
+  local ignore = {
+    ['c'] = true, -- command mode
+    ['t'] = true  -- terminal mode
+  }
+
+  local mode = vim.api.nvim_get_mode().mode
+
+  if ignore[mode] then
+    return ok
+  end
+
+  local levels = vim.diagnostic.severity
+  local errors = #vim.diagnostic.get(0, {severity = levels.ERROR})
+  if errors > 0 then
+    return ' ✘ '
+  end
+
+  local warnings = #vim.diagnostic.get(0, {severity = levels.WARN})
+  if warnings > 0 then
+    return ' ▲ '
+  end
+
+  return ok
+end
+
+function cmp.position()
+  return hi_pattern:format('Search',' %3l:%-2c ')
+end
+
+local statusline = {
+  '%{%v:lua._statusline_component("diagnostic_status")%} ',
+  '%t',
+  '%r',
+  '%m',
+  '%=',
+  '%{&filetype} ',
+  '%2p%% ',
+  'char[%b]',
+  ' %3l:%-2c ',
+  -- '%{%v:lua._statusline_component("position")%}'
+}
+
+vim.o.statusline = table.concat(statusline, '')
+
 -- disable mouse popup yet keep mouse enabled
 vim.cmd [[
   aunmenu PopUp
@@ -7,10 +84,10 @@ vim.cmd [[
 
 -- Only highlight with treesitter
 -- vim.cmd 'syntax off'
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = { '<filetype>' },
-  callback = function() vim.treesitter.start() end,
-})
+-- vim.api.nvim_create_autocmd('FileType', {
+--   pattern = { '<filetype>' },
+--   callback = function() vim.treesitter.start() end,
+-- })
 
 require('vim._core.ui2').enable {
   enable = true, -- Whether to enable or disable the UI.
@@ -97,7 +174,6 @@ vim.o.relativenumber = true
 vim.o.breakindent = true
 vim.opt.wrap = false
 
-vim.opt.termguicolors = true
 
 -- Indenting not too literal guess indent takes care most of the time
 vim.opt.tabstop = 4
@@ -157,9 +233,9 @@ vim.opt.undofile = true
 vim.cmd [[set noswapfile]]
 
 -- Folding
-vim.opt.foldmethod = 'expr' -- Use expression for folding
-vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()' -- Use treesitter for folding
-vim.opt.foldlevel = 99 -- Keep all folds open by default
+-- vim.opt.foldmethod = 'expr' -- Use expression for folding
+-- vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()' -- Use treesitter for folding
+-- vim.opt.foldlevel = 99 -- Keep all folds open by default
 
 -- Set the background to a dark grey and the text to white
 -- vim.api.nvim_set_hl(0, 'NormalFloat', { bg = '#232332', fg = '#cdd6f4' })

@@ -42,31 +42,41 @@ vim.keymap.set({ 'n' }, 'gt', '<cmd>tabnew<CR>', { desc = 'new tab' })
 vim.keymap.set('i', '<C-BS>', '<C-w>', { noremap = false, silent = true })
 vim.keymap.set('i', '<C-H>', '<C-w>', { noremap = false, silent = true })
 
-vim.keymap.set({ 'n' }, '<leader>sc', '<cmd>Telescope colorscheme<CR>', { desc = 'todo list search' })
+-- vim.keymap.set({ 'n' }, '<leader>sc', '<cmd>Telescope colorscheme<CR>', { desc = 'todo list search' })
 
-vim.keymap.set('n', '<leader>S', '<cmd>setlocal spell!<CR>', { noremap = true, silent = true, desc = 'Toggle spellcheck' })
-vim.keymap.set('n', '<leader>L', function()
+vim.keymap.set('n', '<leader>ts', '<cmd>setlocal spell!<CR>', { noremap = true, silent = true, desc = 'Toggle spellcheck' })
+vim.keymap.set('n', '<leader>tl', function()
   -- Get the current diagnostic configuration
   local current_underline = vim.diagnostic.config().underline
-  
+
   -- Toggle the underline setting
-  vim.diagnostic.config({ underline = not current_underline })
+  vim.diagnostic.config { underline = not current_underline }
 end, { noremap = true, silent = true, desc = 'Toggle diagnostic underlines' })
 -- Markdown nvim search todos
-vim.keymap.set(
-  { 'n' },
-  '<leader>st',
-  '<cmd>TodoTelescope keywords=TODO,FIX,WARNING;<CR>',
-  { desc = 'todo list search' }
-)
+vim.keymap.set({ 'n' }, '<leader>st', '<cmd>TodoTelescope keywords=TODO,FIX,WARNING;<CR>', { desc = 'todo list search' })
 
 vim.keymap.set({ 'n' }, '<Leader>e', '<cmd>Oil <CR>', { desc = 'oil explorer' })
 vim.keymap.set({ 'n' }, '<Leader>u', '<cmd>Undotree <CR>', { desc = 'undotree' })
 
-vim.keymap.set({ 'n' }, '<Leader>w', '<Cmd>update<CR>', { desc = 'write' })
-vim.keymap.set({ 'n', 'i', 'v' }, '<C-q>', '<Cmd>w<CR><Cmd>bd<CR>', { desc = 'delete buffer' })
-vim.keymap.set({ 'n' }, '<Leader>q', '<Cmd>q<CR>', { desc = 'quit' })
-vim.keymap.set({ 'n' }, '<Leader>Q', '<Cmd>wqa<CR>', { desc = 'quit all force' })
+-- vim.keymap.set({ 'n' }, '<Leader>w', '<Cmd>update<CR>', { desc = 'write' })
+vim.keymap.set({ 'n' }, '<Leader>q', function()
+  local buf = vim.api.nvim_get_current_buf()
+  local is_readonly = vim.bo[buf].readonly
+  local is_modifiable = vim.bo[buf].modifiable
+  local has_file_name = vim.api.nvim_buf_get_name(buf) ~= ''
+
+  -- If the condition is met (writable and has a file associated)
+  if not is_readonly and is_modifiable and has_file_name then
+    -- 'update' acts like 'write', but only saves if there are unsaved changes
+    pcall(vim.cmd, 'silent! update')
+  end
+
+  -- Delete the buffer forcefully (ignoring unsaved changes if it wasn't writable)
+  vim.cmd 'bdelete!'
+end, { noremap = true, silent = true, desc = 'Close current buffer trying to save it first' })
+
+-- vim.keymap.set({ 'n' }, '<Leader>q', '<Cmd>q<CR>', { desc = 'quit' })
+-- vim.keymap.set({ 'n' }, '<Leader>Q', '<Cmd>wqa<CR>', { desc = 'quit all force' })
 
 -- Competitest
 vim.keymap.set({ 'n' }, '<Leader>cp', '<cmd>CompetiTest run<CR>', { desc = 'Competitive run' })
@@ -74,9 +84,9 @@ vim.keymap.set({ 'n' }, '<Leader>cP', '<cmd>CompetiTest receive problem<CR>', { 
 
 -- Compile mode nvim
 -- Trigger the compilation prompt (similar to Emacs' M-x compile)
-vim.keymap.set("n", "<leader>cc", "<cmd>Compile<CR>", { desc = "Compile" })
+vim.keymap.set('n', '<leader>cc', '<cmd>Compile<CR>', { desc = 'Compile' })
 -- Quickly re-run the last compilation without prompting
-vim.keymap.set("n", "<leader>cr", "<cmd>Recompile<CR>", { desc = "Recompile" })
+vim.keymap.set('n', '<leader>cr', '<cmd>Recompile<CR>', { desc = 'Recompile' })
 -- Navigate through errors in your current files
 -- vim.keymap.set("n", "]e", "<cmd>NextError<CR>", { desc = "Next Compile Error" })
 -- vim.keymap.set("n", "[e", "<cmd>PrevError<CR>", { desc = "Prev Compile Error" })
@@ -108,8 +118,8 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>d', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 -- Show diagnostic in a floating window
-vim.keymap.set('n', 'gD', vim.diagnostic.open_float, { desc = 'Show diagnostic under cursor', noremap = true, silent = true  })
-vim.keymap.set('n', 'zd', vim.diagnostic.open_float, { desc = 'Show diagnostic under cursor', noremap = true, silent = true  })
+vim.keymap.set('n', 'td', vim.diagnostic.open_float, { desc = 'Show diagnostic under cursor', noremap = true, silent = true })
+-- vim.keymap.set('n', 'zd', vim.diagnostic.open_float, { desc = 'Show diagnostic under cursor', noremap = true, silent = true  })
 
 -- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
 -- or just use <C-\><C-n> to exit terminal mode

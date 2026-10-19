@@ -22,7 +22,6 @@ require('blink.cmp').setup {
   keymap = {
     -- 'default' (recommended) for mappings similar to built-in completions
     -- ['<C-e>'] = { function(cmp) cmp.show({ providers = { 'snippets' } }) end },
-    
 
     --   <c-y> to accept ([y]es) the completion.
     --    This will auto-import if your LSP supports it.
@@ -60,6 +59,23 @@ require('blink.cmp').setup {
     -- By default, you may press `<c-space>` to show the documentation.
     -- Optionally, set `auto_show = true` to show the documentation after a delay.
     documentation = { auto_show = false, auto_show_delay_ms = 500 },
+    list = {
+      selection = {
+        preselect = false,
+        auto_insert = false,
+      },
+    },
+    menu = {
+      -- draw = {
+      --   padding = { 0, 1 }, -- padding only on right side
+      --   components = {
+      --     kind_icon = {
+      --       text = function(ctx) return ' ' .. ctx.kind_icon .. ctx.icon_gap .. ' ' end,
+      --     },
+      --   },
+      -- },
+
+    },
   },
 
   -- sources = {

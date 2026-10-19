@@ -3,6 +3,7 @@ vim.loader.enable()
 -- leader keys before plugins
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
+vim.opt.termguicolors = true
 -- [[ Install plugins with `vim.pack` ]]
 --  See `:help vim.pack`, `:help vim.pack-examples` or
 --  the excellent blog post from the creator of mini.nvim https://echasnovski.com/blog/2026-03-13-a-guide-to-vim-pack
